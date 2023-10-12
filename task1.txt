@@ -1,0 +1,140 @@
+mysql> create database information;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> use information;
+Database changed
+mysql> select database();
++-------------+
+| database()  |
++-------------+
+| information |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> create table student(
+    -> name varchar(200),
+    -> age int(2),
+    -> score int(3));
+Query OK, 0 rows affected, 2 warnings (0.24 sec)
+
+mysql> desc student;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(200) | YES  |     | NULL    |       |
+| age   | int          | YES  |     | NULL    |       |
+| score | int          | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> create table(
+    -> customer_id int(2),
+    -> first_name varchar(200),
+    -> last_name varchar(200),
+    -> date_of_birth date,
+    -> address varchar(50),
+    -> phone_number int(11));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(
+customer_id int(2),
+first_name varchar(200),
+last_name varchar(200),
+date_of_b' at line 1
+mysql> create table customer(
+    ->      customer_id int(2),
+    ->      first_name varchar(200),
+    ->      last_name varchar(200),
+    ->      date_of_birth date,
+    ->      address varchar(50),
+    ->      phone_number int(11));
+Query OK, 0 rows affected, 2 warnings (0.41 sec)
+
+mysql> desc customer;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| customer_id   | int          | YES  |     | NULL    |       |
+| first_name    | varchar(200) | YES  |     | NULL    |       |
+| last_name     | varchar(200) | YES  |     | NULL    |       |
+| date_of_birth | date         | YES  |     | NULL    |       |
+| address       | varchar(50)  | YES  |     | NULL    |       |
+| phone_number  | int          | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> create table players(
+    -> name varchar(10),
+    -> age int(2),
+    -> score int(2));
+Query OK, 0 rows affected, 2 warnings (0.12 sec)
+
+mysql> desc players;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(10) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into values('ram',28,30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'values('ram',28,30)' at line 1
+mysql> insert into players values('ram',28,30);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from  players;
++------+------+-------+
+| name | age  | score |
++------+------+-------+
+| ram  |   28 |    30 |
++------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> create table player_details(
+    -> name varchar(10),
+    -> age int(2),
+    -> score int(2));
+Query OK, 0 rows affected, 2 warnings (0.26 sec)
+
+mysql> insert into player_details values('suresh',21,70),('venkat',21,43);
+Query OK, 2 rows affected (0.08 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from  player_details;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| suresh |   21 |    70 |
+| venkat |   21 |    43 |
++--------+------+-------+
+2 rows in set (0.03 sec)
+
+mysql> select * from  player_details where name='suresh';
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| suresh |   21 |    70 |
++--------+------+-------+
+1 row in set (0.00 sec)
+
+mysql> create table order_details(
+    -> order_id int(2),
+    -> customer_id int(2),
+    -> order_datetime  date,
+    -> shipped_dtaetime  datetime,
+    -> total_amount float(2));
+Query OK, 0 rows affected, 2 warnings (0.18 sec)
+
+mysql> desc order_details;
++------------------+----------+------+-----+---------+-------+
+| Field            | Type     | Null | Key | Default | Extra |
++------------------+----------+------+-----+---------+-------+
+| order_id         | int      | YES  |     | NULL    |       |
+| customer_id      | int      | YES  |     | NULL    |       |
+| order_datetime   | date     | YES  |     | NULL    |       |
+| shipped_dtaetime | datetime | YES  |     | NULL    |       |
+| total_amount     | float    | YES  |     | NULL    |       |
++------------------+----------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> notee

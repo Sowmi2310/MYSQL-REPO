@@ -1,0 +1,180 @@
+mysql> create database player;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> use players;
+ERROR 1049 (42000): Unknown database 'players'
+mysql> create database player;
+ERROR 1007 (HY000): Can't create database 'player'; database exists
+mysql> create database sports;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> use sports;
+Database changed
+mysql> select database();
++------------+
+| database() |
++------------+
+| sports     |
++------------+
+1 row in set (0.00 sec)
+
+mysql> create table player(
+    -> name varchar(20),
+    -> age int(2),
+    -> score int(2));
+Query OK, 0 rows affected, 2 warnings (0.14 sec)
+
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> alter table player drop column score;
+Query OK, 0 rows affected (0.11 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table player add score int(3);
+Query OK, 0 rows affected, 1 warning (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> decs player;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'decs player' at line 1
+mysql> desc player;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| score | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into player values('raj',26,120);
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into players values('ram',28,125),('charan',25,173),('ravan',20,152);
+ERROR 1146 (42S02): Table 'sports.players' doesn't exist
+mysql>  insert into player values('ram',28,125),('charan',25,173),('ravan',20,152);
+Query OK, 3 rows affected (0.09 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
++--------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into player values('shyam',12,123),('david',23,187);
+Query OK, 2 rows affected (0.07 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   12 |   123 |
+| david  |   23 |   187 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> update player set age=30 where name='shyam';
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   30 |   123 |
+| david  |   23 |   187 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> delete from marks where name='david';
+ERROR 1146 (42S02): Table 'sports.marks' doesn't exist
+mysql> delete from player where name='david';
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from player;
++--------+------+-------+
+| name   | age  | score |
++--------+------+-------+
+| raj    |   26 |   120 |
+| ram    |   28 |   125 |
+| charan |   25 |   173 |
+| ravan  |   20 |   152 |
+| shyam  |   30 |   123 |
++--------+------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter  table  player add strike_rate decimal(4);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from player;
++--------+------+-------+-------------+
+| name   | age  | score | strike_rate |
++--------+------+-------+-------------+
+| raj    |   26 |   120 |        NULL |
+| ram    |   28 |   125 |        NULL |
+| charan |   25 |   173 |        NULL |
+| ravan  |   20 |   152 |        NULL |
+| shyam  |   30 |   123 |        NULL |
++--------+------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select name,age from player;
++--------+------+
+| name   | age  |
++--------+------+
+| raj    |   26 |
+| ram    |   28 |
+| charan |   25 |
+| ravan  |   20 |
+| shyam  |   30 |
++--------+------+
+5 rows in set (0.00 sec)
+
+mysql> alter table plater rename column name to full_name;
+ERROR 1146 (42S02): Table 'sports.plater' doesn't exist
+mysql>  alter table player rename column name to full_name;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from player;
++-----------+------+-------+-------------+
+| full_name | age  | score | strike_rate |
++-----------+------+-------+-------------+
+| raj       |   26 |   120 |        NULL |
+| ram       |   28 |   125 |        NULL |
+| charan    |   25 |   173 |        NULL |
+| ravan     |   20 |   152 |        NULL |
+| shyam     |   30 |   123 |        NULL |
++-----------+------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> truncate table player;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from player;
+Empty set (0.00 sec)
+
+mysql> notee

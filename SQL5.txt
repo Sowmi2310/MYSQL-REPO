@@ -1,0 +1,511 @@
+mysql> select substr('sowmiya',4,1);
++-----------------------+
+| substr('sowmiya',4,1) |
++-----------------------+
+| m                     |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select hiredate, round(datediff(curdate(),hiredate)) as 'experienced days',round(datediff(curdate(),hiredate/12))as 'experienced month',round(datediff(curdate(),hiredate/365)) as 'experienced years' from emp;
++------------+------------------+-------------------+-------------------+
+| hiredate   | experienced days | experienced month | experienced years |
++------------+------------------+-------------------+-------------------+
+| 1980-12-17 |            15638 |              NULL |              NULL |
+| 1981-02-20 |            15573 |              NULL |              NULL |
+| 1981-02-22 |            15571 |              NULL |              NULL |
+| 1981-04-02 |            15532 |              NULL |              NULL |
+| 1981-09-28 |            15353 |              NULL |              NULL |
+| 1981-05-01 |            15503 |              NULL |              NULL |
+| 1981-06-09 |            15464 |              NULL |              NULL |
+| 1982-12-09 |            14916 |              NULL |              NULL |
+| 1981-11-17 |            15303 |              NULL |              NULL |
+| 1981-09-08 |            15373 |              NULL |              NULL |
+| 1983-01-12 |            14882 |              NULL |              NULL |
+| 1981-12-03 |            15287 |              NULL |              NULL |
+| 1981-12-03 |            15287 |              NULL |              NULL |
+| 1982-01-23 |            15236 |              NULL |              NULL |
++------------+------------------+-------------------+-------------------+
+14 rows in set, 28 warnings (0.10 sec)
+
+mysql> select hiredate, round(datediff(curdate(),hiredate)) as 'experienced days',round(datediff((curdate(),hiredate)/12))as 'experienced month',round(datediff((curdate(),hiredate)/365)) as 'experienced years' from emp;
+ERROR 1582 (42000): Incorrect parameter count in the call to native function 'datediff'
+mysql> select hiredate, round(datediff(curdate(),hiredate)) as 'experienced days',round(datediff(curdate(),hiredate)/12)as 'experienced month',round(datediff(curdate(),hiredate)/365) as 'experienced years' from emp;
++------------+------------------+-------------------+-------------------+
+| hiredate   | experienced days | experienced month | experienced years |
++------------+------------------+-------------------+-------------------+
+| 1980-12-17 |            15638 |              1303 |                43 |
+| 1981-02-20 |            15573 |              1298 |                43 |
+| 1981-02-22 |            15571 |              1298 |                43 |
+| 1981-04-02 |            15532 |              1294 |                43 |
+| 1981-09-28 |            15353 |              1279 |                42 |
+| 1981-05-01 |            15503 |              1292 |                42 |
+| 1981-06-09 |            15464 |              1289 |                42 |
+| 1982-12-09 |            14916 |              1243 |                41 |
+| 1981-11-17 |            15303 |              1275 |                42 |
+| 1981-09-08 |            15373 |              1281 |                42 |
+| 1983-01-12 |            14882 |              1240 |                41 |
+| 1981-12-03 |            15287 |              1274 |                42 |
+| 1981-12-03 |            15287 |              1274 |                42 |
+| 1982-01-23 |            15236 |              1270 |                42 |
++------------+------------------+-------------------+-------------------+
+14 rows in set (0.00 sec)
+
+mysql> select length('sowmiya');
++-------------------+
+| length('sowmiya') |
++-------------------+
+|                 7 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select  adddate (curdate
+    -> ' ;
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 3
+mysql> select adddate(curdate(),interval 25 year);
++-------------------------------------+
+| adddate(curdate(),interval 25 year) |
++-------------------------------------+
+| 2048-10-11                          |
++-------------------------------------+
+1 row in set (0.06 sec)
+
+mysql> select adddate(curdate(),interval 25 year,interval 10 months,interval 23 days);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',interval 10 months,interval 23 days)' at line 1
+mysql> select name,job,hiredate ,adddate(hiredate,interval 8 month)  from emp;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select ename,job,hiredate ,adddate(hiredate,interval 8 month)  from emp;
++--------+-----------+------------+------------------------------------+
+| ename  | job       | hiredate   | adddate(hiredate,interval 8 month) |
++--------+-----------+------------+------------------------------------+
+| SMITH  | CLERK     | 1980-12-17 | 1981-08-17                         |
+| ALLEN  | SALESMAN  | 1981-02-20 | 1981-10-20                         |
+| WARD   | SALESMAN  | 1981-02-22 | 1981-10-22                         |
+| JONES  | MANAGER   | 1981-04-02 | 1981-12-02                         |
+| MARTIN | SALESMAN  | 1981-09-28 | 1982-05-28                         |
+| BLAKE  | MANAGER   | 1981-05-01 | 1982-01-01                         |
+| CLARK  | MANAGER   | 1981-06-09 | 1982-02-09                         |
+| SCOTT  | ANALYST   | 1982-12-09 | 1983-08-09                         |
+| KING   | PRESIDENT | 1981-11-17 | 1982-07-17                         |
+| TURNER | SALESMAN  | 1981-09-08 | 1982-05-08                         |
+| ADAMS  | CLERK     | 1983-01-12 | 1983-09-12                         |
+| JAMES  | CLERK     | 1981-12-03 | 1982-08-03                         |
+| FORD   | ANALYST   | 1981-12-03 | 1982-08-03                         |
+| MILLER | CLERK     | 1982-01-23 | 1982-09-23                         |
++--------+-----------+------------+------------------------------------+
+14 rows in set (0.00 sec)
+
+mysql> select ename,job,hiredate ,adddate(hiredate,interval 8 month) as 'date of confirmation' from emp;
++--------+-----------+------------+----------------------+
+| ename  | job       | hiredate   | date of confirmation |
++--------+-----------+------------+----------------------+
+| SMITH  | CLERK     | 1980-12-17 | 1981-08-17           |
+| ALLEN  | SALESMAN  | 1981-02-20 | 1981-10-20           |
+| WARD   | SALESMAN  | 1981-02-22 | 1981-10-22           |
+| JONES  | MANAGER   | 1981-04-02 | 1981-12-02           |
+| MARTIN | SALESMAN  | 1981-09-28 | 1982-05-28           |
+| BLAKE  | MANAGER   | 1981-05-01 | 1982-01-01           |
+| CLARK  | MANAGER   | 1981-06-09 | 1982-02-09           |
+| SCOTT  | ANALYST   | 1982-12-09 | 1983-08-09           |
+| KING   | PRESIDENT | 1981-11-17 | 1982-07-17           |
+| TURNER | SALESMAN  | 1981-09-08 | 1982-05-08           |
+| ADAMS  | CLERK     | 1983-01-12 | 1983-09-12           |
+| JAMES  | CLERK     | 1981-12-03 | 1982-08-03           |
+| FORD   | ANALYST   | 1981-12-03 | 1982-08-03           |
+| MILLER | CLERK     | 1982-01-23 | 1982-09-23           |
++--------+-----------+------------+----------------------+
+14 rows in set (0.03 sec)
+
+mysql> select ename,sal,sal*12/100 as 'P.F' from emp;
++--------+---------+------------+
+| ename  | sal     | P.F        |
++--------+---------+------------+
+| SMITH  |  800.00 |  96.000000 |
+| ALLEN  | 1600.00 | 192.000000 |
+| WARD   | 1250.00 | 150.000000 |
+| JONES  | 2975.00 | 357.000000 |
+| MARTIN | 1250.00 | 150.000000 |
+| BLAKE  | 2850.00 | 342.000000 |
+| CLARK  | 2450.00 | 294.000000 |
+| SCOTT  | 3000.00 | 360.000000 |
+| KING   | 5000.00 | 600.000000 |
+| TURNER | 1500.00 | 180.000000 |
+| ADAMS  | 1100.00 | 132.000000 |
+| JAMES  |  950.00 | 114.000000 |
+| FORD   | 3000.00 | 360.000000 |
+| MILLER | 1300.00 | 156.000000 |
++--------+---------+------------+
+14 rows in set (0.00 sec)
+
+mysql> select ename,sal,sal+12/100 as 'P.F' from emp;
++--------+---------+-----------+
+| ename  | sal     | P.F       |
++--------+---------+-----------+
+| SMITH  |  800.00 |  800.1200 |
+| ALLEN  | 1600.00 | 1600.1200 |
+| WARD   | 1250.00 | 1250.1200 |
+| JONES  | 2975.00 | 2975.1200 |
+| MARTIN | 1250.00 | 1250.1200 |
+| BLAKE  | 2850.00 | 2850.1200 |
+| CLARK  | 2450.00 | 2450.1200 |
+| SCOTT  | 3000.00 | 3000.1200 |
+| KING   | 5000.00 | 5000.1200 |
+| TURNER | 1500.00 | 1500.1200 |
+| ADAMS  | 1100.00 | 1100.1200 |
+| JAMES  |  950.00 |  950.1200 |
+| FORD   | 3000.00 | 3000.1200 |
+| MILLER | 1300.00 | 1300.1200 |
++--------+---------+-----------+
+14 rows in set (0.00 sec)
+
+mysql> select ename,sal,sal*1.2 as 'P.F',sal*0.8 as 'HRA',sal*36/100 as 'DA'from emp;
++--------+---------+----------+----------+-------------+
+| ename  | sal     | P.F      | HRA      | DA          |
++--------+---------+----------+----------+-------------+
+| SMITH  |  800.00 |  960.000 |  640.000 |  288.000000 |
+| ALLEN  | 1600.00 | 1920.000 | 1280.000 |  576.000000 |
+| WARD   | 1250.00 | 1500.000 | 1000.000 |  450.000000 |
+| JONES  | 2975.00 | 3570.000 | 2380.000 | 1071.000000 |
+| MARTIN | 1250.00 | 1500.000 | 1000.000 |  450.000000 |
+| BLAKE  | 2850.00 | 3420.000 | 2280.000 | 1026.000000 |
+| CLARK  | 2450.00 | 2940.000 | 1960.000 |  882.000000 |
+| SCOTT  | 3000.00 | 3600.000 | 2400.000 | 1080.000000 |
+| KING   | 5000.00 | 6000.000 | 4000.000 | 1800.000000 |
+| TURNER | 1500.00 | 1800.000 | 1200.000 |  540.000000 |
+| ADAMS  | 1100.00 | 1320.000 |  880.000 |  396.000000 |
+| JAMES  |  950.00 | 1140.000 |  760.000 |  342.000000 |
+| FORD   | 3000.00 | 3600.000 | 2400.000 | 1080.000000 |
+| MILLER | 1300.00 | 1560.000 | 1040.000 |  468.000000 |
++--------+---------+----------+----------+-------------+
+14 rows in set (0.00 sec)
+
+mysql> select length('sowmiya');
++-------------------+
+| length('sowmiya') |
++-------------------+
+|                 7 |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql>  select adddate(curdate(),interval 25 year);
++-------------------------------------+
+| adddate(curdate(),interval 25 year) |
++-------------------------------------+
+| 2048-10-11                          |
++-------------------------------------+
+1 row in set (0.00 sec)
+
+mysql>  select adddate('23.10.2002',interval 25 year);
++----------------------------------------+
+| adddate('23.10.2002',interval 25 year) |
++----------------------------------------+
+| 2048-10-20 02:00:00                    |
++----------------------------------------+
+1 row in set, 1 warning (0.05 sec)
+
+mysql>  select adddate('10.23.2002',interval 25 year);
++----------------------------------------+
+| adddate('10.23.2002',interval 25 year) |
++----------------------------------------+
+| NULL                                   |
++----------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql>  select adddate('23.10.2002',interval 25 year);
++----------------------------------------+
+| adddate('23.10.2002',interval 25 year) |
++----------------------------------------+
+| 2048-10-20 02:00:00                    |
++----------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql>  select adddate('23-10-2002',interval 25 year);
++----------------------------------------+
+| adddate('23-10-2002',interval 25 year) |
++----------------------------------------+
+| NULL                                   |
++----------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql>  select adddate('2002-10-23',interval 25 year);
++----------------------------------------+
+| adddate('2002-10-23',interval 25 year) |
++----------------------------------------+
+| 2027-10-23                             |
++----------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff(curdate(),'2002-10-23');
++----------------------------------+
+| datediff(curdate(),'2002-10-23') |
++----------------------------------+
+|                             7658 |
++----------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff(curdate(),'2002-10-23') as 'days' datediff((curdate(),'2002-10-23')/12) as 'months' datediff((curdate(),'2002-10-23')/365) as 'years';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datediff((curdate(),'2002-10-23')/12) as 'months' datediff((curdate(),'2002-10-2' at line 1
+mysql> select datediff(curdate(),'2002-10-23') as 'days' datediff(curdate(),'2002-10-23')/12 as 'months' datediff(curdate(),'2002-10-23')/365 as 'years';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'datediff(curdate(),'2002-10-23')/12 as 'months' datediff(curdate(),'2002-10-23')' at line 1
+mysql> select datediff(curdate(),'2002-10-23') as 'days',datediff(curdate(),'2002-10-23')/12 as 'months', datediff(curdate(),'2002-10-23')/365 as 'years';
++------+----------+---------+
+| days | months   | years   |
++------+----------+---------+
+| 7658 | 638.1667 | 20.9808 |
++------+----------+---------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> select * from emp;
+ERROR 1046 (3D000): No database selected
+mysql> use emp_details;
+Database changed
+mysql> select database();
++-------------+
+| database()  |
++-------------+
+| emp_details |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select datediff(curdate(),'2002-10-23') as 'days',datediff(curdate(),'2002-10-23')/12 as 'months', datediff(curdate(),'2002-10-23')/365 as 'years';
++------+----------+---------+
+| days | months   | years   |
++------+----------+---------+
+| 7658 | 638.1667 | 20.9808 |
++------+----------+---------+
+1 row in set (0.18 sec)
+
+mysql> select datediff(curdate(),'2003-03-08') as 'days',datediff(curdate(),'2003-03-08')/12 as 'months', datediff(curdate(),'2003-03-08')/365 as 'years';
++------+----------+---------+
+| days | months   | years   |
++------+----------+---------+
+| 7522 | 626.8333 | 20.6082 |
++------+----------+---------+
+1 row in set (0.03 sec)
+
+mysql> select datediff(curdate(),'2005-05-25') as 'days',datediff(curdate(),'2005-05-25')/12 as 'months', datediff(curdate(),'2005-05-25')/365 as 'years'
+    -> ' ;
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' ;
+'' at line 2
+mysql> select datediff(curdate(),'2005-05-25') as 'days',datediff(curdate(),'2005-05-25')/12 as 'months', datediff(curdate(),'2005-05-25')/365 as 'years';
++------+----------+---------+
+| days | months   | years   |
++------+----------+---------+
+| 6713 | 559.4167 | 18.3918 |
++------+----------+---------+
+1 row in set (0.00 sec)
+
+mysql> select day(heridate) from emp;
+ERROR 1054 (42S22): Unknown column 'heridate' in 'field list'
+mysql> select day(hiredate) from emp;
++---------------+
+| day(hiredate) |
++---------------+
+|            17 |
+|            20 |
+|            22 |
+|             2 |
+|            28 |
+|             1 |
+|             9 |
+|             9 |
+|            17 |
+|             8 |
+|            12 |
+|             3 |
+|             3 |
+|            23 |
++---------------+
+14 rows in set (0.24 sec)
+
+mysql> select dayname(hiredate) from emp;
++-------------------+
+| dayname(hiredate) |
++-------------------+
+| Wednesday         |
+| Friday            |
+| Sunday            |
+| Thursday          |
+| Monday            |
+| Friday            |
+| Tuesday           |
+| Thursday          |
+| Tuesday           |
+| Tuesday           |
+| Wednesday         |
+| Thursday          |
+| Thursday          |
+| Saturday          |
++-------------------+
+14 rows in set (0.05 sec)
+
+mysql> select dayname(hiredate)=='wednesday from emp;
+    '> select dayname(hiredate)=='wednesday from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='wednesday from emp;
+select dayname(hiredate)=='wednesday from emp' at line 1
+mysql> select dayname(hiredate)=='wednesday' from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='wednesday' from emp' at line 1
+mysql> select (dayname(hiredate)=='wednesday') from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '=='wednesday') from emp' at line 1
+mysql> select dayname(hiredate) from emp where dayname(hiredate)=wednesday;
+ERROR 1054 (42S22): Unknown column 'wednesday' in 'where clause'
+mysql>  select dayname(hiredate) from emp where dayname(hiredate)='wednesday';
++-------------------+
+| dayname(hiredate) |
++-------------------+
+| Wednesday         |
+| Wednesday         |
++-------------------+
+2 rows in set (0.05 sec)
+
+mysql> select * from emp where dayname(hiredate)='wednesday';
++-------+-------+-------+------+------------+---------+------+--------+---------+
+| empno | ename | job   | mgr  | hiredate   | sal     | comm | deptno | emailid |
++-------+-------+-------+------+------------+---------+------+--------+---------+
+|  7369 | SMITH | CLERK | 7902 | 1980-12-17 |  800.00 | NULL |     20 | NULL    |
+|  7876 | ADAMS | CLERK | 7788 | 1983-01-12 | 1100.00 | NULL |     20 | NULL    |
++-------+-------+-------+------+------------+---------+------+--------+---------+
+2 rows in set (0.04 sec)
+
+mysql> select * from emp where dayname(hiredate)='monday';
++-------+--------+----------+------+------------+---------+---------+--------+---------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno | emailid |
++-------+--------+----------+------+------------+---------+---------+--------+---------+
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | NULL    |
++-------+--------+----------+------+------------+---------+---------+--------+---------+
+1 row in set (0.00 sec)
+
+mysql> select ename,dayname(hiredate) from emp where dayname(hiredate)='monday';
++--------+-------------------+
+| ename  | dayname(hiredate) |
++--------+-------------------+
+| MARTIN | Monday            |
++--------+-------------------+
+1 row in set (0.00 sec)
+
+mysql> select adddate(datediff(curdate(),'1947-08-15')/365) ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> select datediff(curdate(),'1947-08-15')/365 ;
++--------------------------------------+
+| datediff(curdate(),'1947-08-15')/365 |
++--------------------------------------+
+|                              76.2082 |
++--------------------------------------+
+1 row in set (0.06 sec)
+
+mysql> select * from where round(datediff(curdate(),hiredate)/365) > 41  ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where round(datediff(curdate(),hiredate)/365) > 41' at line 1
+mysql> select * from where round(datediff(curdate(),hiredate)/365) > '41'  ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where round(datediff(curdate(),hiredate)/365) > '41'' at line 1
+mysql> select * from where round(datediff(curdate(),hiredate)/365)>41;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where round(datediff(curdate(),hiredate)/365)>41' at line 1
+mysql> select * from emp where round(datediff(curdate(),hiredate)/365)>41;
++-------+--------+-----------+------+------------+---------+---------+--------+---------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno | emailid |
++-------+--------+-----------+------+------------+---------+---------+--------+---------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 | NULL    |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 | NULL    |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 | NULL    |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 | NULL    |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 | NULL    |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 | NULL    |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 | NULL    |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 | NULL    |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 | NULL    |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 | NULL    |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 | NULL    |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 | NULL    |
++-------+--------+-----------+------+------------+---------+---------+--------+---------+
+12 rows in set (0.06 sec)
+
+mysql> select name,round(datediff(curdate(),hiredate)/365)>41 from emp;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select ename,round(datediff(curdate(),hiredate)/365)>41 from emp;
++--------+--------------------------------------------+
+| ename  | round(datediff(curdate(),hiredate)/365)>41 |
++--------+--------------------------------------------+
+| SMITH  |                                          1 |
+| ALLEN  |                                          1 |
+| WARD   |                                          1 |
+| JONES  |                                          1 |
+| MARTIN |                                          1 |
+| BLAKE  |                                          1 |
+| CLARK  |                                          1 |
+| SCOTT  |                                          0 |
+| KING   |                                          1 |
+| TURNER |                                          1 |
+| ADAMS  |                                          0 |
+| JAMES  |                                          1 |
+| FORD   |                                          1 |
+| MILLER |                                          1 |
++--------+--------------------------------------------+
+14 rows in set (0.00 sec)
+
+mysql> select ename,commission if( comm=null,'NO COMMISSION',comm) from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'if( comm=null,'NO COMMISSION',comm) from emp' at line 1
+mysql> select ename,comm, if( comm=null,'NO COMMISSION',comm) from emp;
++--------+---------+-------------------------------------+
+| ename  | comm    | if( comm=null,'NO COMMISSION',comm) |
++--------+---------+-------------------------------------+
+| SMITH  |    NULL | NULL                                |
+| ALLEN  |  300.00 | 300.00                              |
+| WARD   |  500.00 | 500.00                              |
+| JONES  |    NULL | NULL                                |
+| MARTIN | 1400.00 | 1400.00                             |
+| BLAKE  |    NULL | NULL                                |
+| CLARK  |    NULL | NULL                                |
+| SCOTT  |    NULL | NULL                                |
+| KING   |    NULL | NULL                                |
+| TURNER |    0.00 | 0.00                                |
+| ADAMS  |    NULL | NULL                                |
+| JAMES  |    NULL | NULL                                |
+| FORD   |    NULL | NULL                                |
+| MILLER |    NULL | NULL                                |
++--------+---------+-------------------------------------+
+14 rows in set (0.54 sec)
+
+mysql> select ename,comm, if( comm is null,'NO COMMISSION',comm) from emp;
++--------+---------+----------------------------------------+
+| ename  | comm    | if( comm is null,'NO COMMISSION',comm) |
++--------+---------+----------------------------------------+
+| SMITH  |    NULL | NO COMMISSION                          |
+| ALLEN  |  300.00 | 300.00                                 |
+| WARD   |  500.00 | 500.00                                 |
+| JONES  |    NULL | NO COMMISSION                          |
+| MARTIN | 1400.00 | 1400.00                                |
+| BLAKE  |    NULL | NO COMMISSION                          |
+| CLARK  |    NULL | NO COMMISSION                          |
+| SCOTT  |    NULL | NO COMMISSION                          |
+| KING   |    NULL | NO COMMISSION                          |
+| TURNER |    0.00 | 0.00                                   |
+| ADAMS  |    NULL | NO COMMISSION                          |
+| JAMES  |    NULL | NO COMMISSION                          |
+| FORD   |    NULL | NO COMMISSION                          |
+| MILLER |    NULL | NO COMMISSION                          |
++--------+---------+----------------------------------------+
+14 rows in set (0.03 sec)
+
+mysql> select ename,comm, if( comm is null,'NO COMMISSION',comm) as 'As commission or NOT'  from emp;
++--------+---------+----------------------+
+| ename  | comm    | As commission or NOT |
++--------+---------+----------------------+
+| SMITH  |    NULL | NO COMMISSION        |
+| ALLEN  |  300.00 | 300.00               |
+| WARD   |  500.00 | 500.00               |
+| JONES  |    NULL | NO COMMISSION        |
+| MARTIN | 1400.00 | 1400.00              |
+| BLAKE  |    NULL | NO COMMISSION        |
+| CLARK  |    NULL | NO COMMISSION        |
+| SCOTT  |    NULL | NO COMMISSION        |
+| KING   |    NULL | NO COMMISSION        |
+| TURNER |    0.00 | 0.00                 |
+| ADAMS  |    NULL | NO COMMISSION        |
+| JAMES  |    NULL | NO COMMISSION        |
+| FORD   |    NULL | NO COMMISSION        |
+| MILLER |    NULL | NO COMMISSION        |
++--------+---------+----------------------+
+14 rows in set (0.05 sec)
+
+mysql> notee

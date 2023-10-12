@@ -1,0 +1,478 @@
+mysql> use online_products;
+Database changed
+mysql> select database();
++-----------------+
+| database()      |
++-----------------+
+| online_products |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select * from product;
++-----------------+---------------+-------+----------+--------+
+| name            | category      | price | brand    | rating |
++-----------------+---------------+-------+----------+--------+
+| blackshrit      | clothing      |   900 | puma     | 4.8    |
+| cut jeans       | clothing      |  1200 | hoval    | 3.2    |
+| bourbon         | cookies       |    30 | sunfeast | 4.0    |
+| bourbon cookies | cookies       |    50 | sunfeast | 4.5    |
+| lays            | snacks        |    20 | chips    | 5.7    |
+| horlicks        | protein power |   500 | unilever | 5.0    |
++-----------------+---------------+-------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> insert into product values ('doll','handmade',1000,'denim','5.0'),
+    -> ('pot','handmade',2000,'denim','6.0'),
+    -> ('checked shirts','clothing',800,'nike','4.0'),
+    -> ('redmi2','phone',9000,'redmi','9.0'),
+    -> ('redmi34','phone',9000,'redmi','9.7'),
+    -> ('oneplus3','phone',9000,'oneplus','9.9'),
+    -> ('cakes','birthday',500,'cadbury','4.9'),
+    -> ('cakes','birthday',900,'britannia','5.2'),
+    -> ('white shirts','clothing',500,'puma','5.2'),
+    -> ('line shirts','clothing',900,'levis','7.2');
+Query OK, 10 rows affected (0.09 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from product;
++-----------------+---------------+-------+-----------+--------+
+| name            | category      | price | brand     | rating |
++-----------------+---------------+-------+-----------+--------+
+| blackshrit      | clothing      |   900 | puma      | 4.8    |
+| cut jeans       | clothing      |  1200 | hoval     | 3.2    |
+| bourbon         | cookies       |    30 | sunfeast  | 4.0    |
+| bourbon cookies | cookies       |    50 | sunfeast  | 4.5    |
+| lays            | snacks        |    20 | chips     | 5.7    |
+| horlicks        | protein power |   500 | unilever  | 5.0    |
+| doll            | handmade      |  1000 | denim     | 5.0    |
+| pot             | handmade      |  2000 | denim     | 6.0    |
+| checked shirts  | clothing      |   800 | nike      | 4.0    |
+| redmi2          | phone         |  9000 | redmi     | 9.0    |
+| redmi34         | phone         |  9000 | redmi     | 9.7    |
+| oneplus3        | phone         |  9000 | oneplus   | 9.9    |
+| cakes           | birthday      |   500 | cadbury   | 4.9    |
+| cakes           | birthday      |   900 | britannia | 5.2    |
+| white shirts    | clothing      |   500 | puma      | 5.2    |
+| line shirts     | clothing      |   900 | levis     | 7.2    |
++-----------------+---------------+-------+-----------+--------+
+16 rows in set (0.00 sec)
+
+mysql> select category where category='clothing' and price<700;
+ERROR 1054 (42S22): Unknown column 'category' in 'field list'
+mysql> select category from product where category='clothing' and price<700;
++----------+
+| category |
++----------+
+| clothing |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from product where category='clothing' and price<700;
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from product where brand='denim' and rating>4;
++------+----------+-------+-------+--------+
+| name | category | price | brand | rating |
++------+----------+-------+-------+--------+
+| doll | handmade |  1000 | denim | 5.0    |
+| pot  | handmade |  2000 | denim | 6.0    |
++------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where price<=1000; and rating>'4.0';
++-----------------+---------------+-------+-----------+--------+
+| name            | category      | price | brand     | rating |
++-----------------+---------------+-------+-----------+--------+
+| blackshrit      | clothing      |   900 | puma      | 4.8    |
+| bourbon         | cookies       |    30 | sunfeast  | 4.0    |
+| bourbon cookies | cookies       |    50 | sunfeast  | 4.5    |
+| lays            | snacks        |    20 | chips     | 5.7    |
+| horlicks        | protein power |   500 | unilever  | 5.0    |
+| doll            | handmade      |  1000 | denim     | 5.0    |
+| checked shirts  | clothing      |   800 | nike      | 4.0    |
+| cakes           | birthday      |   500 | cadbury   | 4.9    |
+| cakes           | birthday      |   900 | britannia | 5.2    |
+| white shirts    | clothing      |   500 | puma      | 5.2    |
+| line shirts     | clothing      |   900 | levis     | 7.2    |
++-----------------+---------------+-------+-----------+--------+
+11 rows in set (0.00 sec)
+
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and rating>'4.0'' at line 1
+mysql> select * from product where price<=1000 and rating>'4.0';
++-----------------+---------------+-------+-----------+--------+
+| name            | category      | price | brand     | rating |
++-----------------+---------------+-------+-----------+--------+
+| blackshrit      | clothing      |   900 | puma      | 4.8    |
+| bourbon cookies | cookies       |    50 | sunfeast  | 4.5    |
+| lays            | snacks        |    20 | chips     | 5.7    |
+| horlicks        | protein power |   500 | unilever  | 5.0    |
+| doll            | handmade      |  1000 | denim     | 5.0    |
+| cakes           | birthday      |   500 | cadbury   | 4.9    |
+| cakes           | birthday      |   900 | britannia | 5.2    |
+| white shirts    | clothing      |   500 | puma      | 5.2    |
+| line shirts     | clothing      |   900 | levis     | 7.2    |
++-----------------+---------------+-------+-----------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from product where rating>3.6 and price<1000 and brand='puma';
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where brand='puma' or brand='denim' brand='nike';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'brand='nike'' at line 1
+mysql> select * from product where (brand='puma') or (brand='denim') or (brand='nike');
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| doll           | handmade |  1000 | denim | 5.0    |
+| pot            | handmade |  2000 | denim | 6.0    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
++----------------+----------+-------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from product where (brand='redmi' and  rating>4) or (brand='oneplus'); 
++----------+----------+-------+---------+--------+
+| name     | category | price | brand   | rating |
++----------+----------+-------+---------+--------+
+| redmi2   | phone    |  9000 | redmi   | 9.0    |
+| redmi34  | phone    |  9000 | redmi   | 9.7    |
+| oneplus3 | phone    |  9000 | oneplus | 9.9    |
++----------+----------+-------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select name from products where name='cakes'and rating>4.0;
+ERROR 1146 (42S02): Table 'online_products.products' doesn't exist
+mysql> select name from products where name='cakes'and rating>'4.0';
+ERROR 1146 (42S02): Table 'online_products.products' doesn't exist
+mysql> select name from product where name='cakes'and rating>'4.0';
++-------+
+| name  |
++-------+
+| cakes |
+| cakes |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select * product where name='cakes'and rating>'4.0';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product where name='cakes'and rating>'4.0'' at line 1
+mysql> select * product where (name='cakes') and (rating>'4.0');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product where (name='cakes') and (rating>'4.0')' at line 1
+mysql> select * from product where (name='cakes') and (rating>'4.0');
++-------+----------+-------+-----------+--------+
+| name  | category | price | brand     | rating |
++-------+----------+-------+-----------+--------+
+| cakes | birthday |   500 | cadbury   | 4.9    |
+| cakes | birthday |   900 | britannia | 5.2    |
++-------+----------+-------+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where (brand='puma' and rating>3.5) or (brand='demin' and rating>4.0);
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where (brand='puma' and rating>3.5) and (brand='demin' and rating>4.0);
+Empty set (0.03 sec)
+
+mysql> select * from product where (brand='puma' and rating>3.5) and brand='demin' and rating>4.0;
+Empty set (0.00 sec)
+
+mysql> select * from product where (brand='puma' and rating>3.5) or brand='demin' and rating>4.0;
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> select * from product where brand='puma' and rating>3.5 or brand='demin' and rating>4.0;
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where brand='puma' and rating>3.5 or (brand='demin' and rating>4.0);
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where (brand='puma' and rating>'3.5') or (brand='demin' and rating>'4.0');
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> select * from product where (brand='puma' and rating>'3.5') or (brand='demin');
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from product where brand='demin' and rating>4.0;
+Empty set (0.00 sec)
+
+mysql> select * from product where (brand='demin' and rating>4.0);
+Empty set (0.00 sec)
+
+mysql> select * from product where (brand='demin' and rating>'4.0');
+Empty set (0.00 sec)
+
+mysql> select * from product where brand='demin';
+Empty set (0.00 sec)
+
+mysql> select * from product where name='doll';
++------+----------+-------+-------+--------+
+| name | category | price | brand | rating |
++------+----------+-------+-------+--------+
+| doll | handmade |  1000 | denim | 5.0    |
++------+----------+-------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from product where (brand='puma and  rating>4) or (brand='denim');
+    '> ' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'denim');
+'' at line 1
+mysql> select * from product where (brand='puma' and  rating>4) or (brand='denim');
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| doll         | handmade |  1000 | denim | 5.0    |
+| pot          | handmade |  2000 | denim | 6.0    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product where (brand='puma' and  rating>3.5) or (brand='denim' and rating>4.0);
++--------------+----------+-------+-------+--------+
+| name         | category | price | brand | rating |
++--------------+----------+-------+-------+--------+
+| blackshrit   | clothing |   900 | puma  | 4.8    |
+| doll         | handmade |  1000 | denim | 5.0    |
+| pot          | handmade |  2000 | denim | 6.0    |
+| white shirts | clothing |   500 | puma  | 5.2    |
++--------------+----------+-------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product where brand='puma' or brand='nike' or brand='levis' and name='black shrit';
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
++----------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> 
+mysql>  select * from product where brand='puma' or brand='nike' or brand='levis' and name like'%shrits';
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
++----------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product where brand='puma' or brand='nike' or brand='levis' or name like'%shrits';
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
+| line shirts    | clothing |   900 | levis | 7.2    |
++----------------+----------+-------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql>  select * from product where brand='puma' or brand='nike' or brand='levis' and name like'%shrits'
+    -> 
+    -> ' ;
+    '> ' ;
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
++----------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql>  select * from product where ( brand='puma' or brand='nike' or brand='levis') and (name like'%shrits');
+Empty set (0.00 sec)
+
+mysql> select * from product where  brand='puma' or brand='nike' or brand='levis' and (name like'%shrits');
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
++----------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql>  select * from product where  brand='puma' and brand='nike' and brand='levis' or (name like'%shrits');
+Empty set (0.00 sec)
+
+mysql> select * from product where  brand='puma' or brand='nike' or brand='levis' not (name='blackshrit');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(name='blackshrit')' at line 1
+mysql> update product set name='shirts' where name in ('nike','levis') ;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from product;
++-----------------+---------------+-------+-----------+--------+
+| name            | category      | price | brand     | rating |
++-----------------+---------------+-------+-----------+--------+
+| blackshrit      | clothing      |   900 | puma      | 4.8    |
+| cut jeans       | clothing      |  1200 | hoval     | 3.2    |
+| bourbon         | cookies       |    30 | sunfeast  | 4.0    |
+| bourbon cookies | cookies       |    50 | sunfeast  | 4.5    |
+| lays            | snacks        |    20 | chips     | 5.7    |
+| horlicks        | protein power |   500 | unilever  | 5.0    |
+| doll            | handmade      |  1000 | denim     | 5.0    |
+| pot             | handmade      |  2000 | denim     | 6.0    |
+| checked shirts  | clothing      |   800 | nike      | 4.0    |
+| redmi2          | phone         |  9000 | redmi     | 9.0    |
+| redmi34         | phone         |  9000 | redmi     | 9.7    |
+| oneplus3        | phone         |  9000 | oneplus   | 9.9    |
+| cakes           | birthday      |   500 | cadbury   | 4.9    |
+| cakes           | birthday      |   900 | britannia | 5.2    |
+| white shirts    | clothing      |   500 | puma      | 5.2    |
+| line shirts     | clothing      |   900 | levis     | 7.2    |
++-----------------+---------------+-------+-----------+--------+
+16 rows in set (0.00 sec)
+
+mysql> update product rename name='shirts' where name in ('nike','levis') ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rename name='shirts' where name in ('nike','levis')' at line 1
+mysql> mysql> select * from product where brand='puma' and brand='nike' or brand='levis' or name like'%shrits';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from product where brand='puma' and brand='nike' or brand='levis' at line 1
+mysql> mysql> select * from product where brand='puma' or brand='nike' or brand='levis';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from product where brand='puma' or brand='nike' or brand='levis'' at line 1
+mysql> mysql> select * from product where (brand='puma') or (brand='nike') or (brand='levis');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from product where (brand='puma') or (brand='nike') or (brand='l' at line 1
+mysql> 
+mysql> 
+mysql> 
+mysql> mysql> select * from product where (brand='puma') or (brand='nike') or (brand='levis');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from product where (brand='puma') or (brand='nike') or (brand='l' at line 1
+mysql> mysql> select * from product where (brand='nike' or brand='puma' or brand='levis')and(name like '%shirts');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from product where (brand='nike' or brand='puma' or brand='levis' at line 1
+mysql> mysql> select * from product where name like '%shirts';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'mysql> select * from product where name like '%shirts'' at line 1
+mysql> update product set name='shirts' where name ='levis';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update product set name='shirts' where name ='nike';
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from product;
++-----------------+---------------+-------+-----------+--------+
+| name            | category      | price | brand     | rating |
++-----------------+---------------+-------+-----------+--------+
+| blackshrit      | clothing      |   900 | puma      | 4.8    |
+| cut jeans       | clothing      |  1200 | hoval     | 3.2    |
+| bourbon         | cookies       |    30 | sunfeast  | 4.0    |
+| bourbon cookies | cookies       |    50 | sunfeast  | 4.5    |
+| lays            | snacks        |    20 | chips     | 5.7    |
+| horlicks        | protein power |   500 | unilever  | 5.0    |
+| doll            | handmade      |  1000 | denim     | 5.0    |
+| pot             | handmade      |  2000 | denim     | 6.0    |
+| checked shirts  | clothing      |   800 | nike      | 4.0    |
+| redmi2          | phone         |  9000 | redmi     | 9.0    |
+| redmi34         | phone         |  9000 | redmi     | 9.7    |
+| oneplus3        | phone         |  9000 | oneplus   | 9.9    |
+| cakes           | birthday      |   500 | cadbury   | 4.9    |
+| cakes           | birthday      |   900 | britannia | 5.2    |
+| white shirts    | clothing      |   500 | puma      | 5.2    |
+| line shirts     | clothing      |   900 | levis     | 7.2    |
++-----------------+---------------+-------+-----------+--------+
+16 rows in set (0.03 sec)
+
+mysql> select name where name like '%shirts';
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+mysql> select name from product where name like '%shirts';
++----------------+
+| name           |
++----------------+
+| checked shirts |
+| white shirts   |
+| line shirts    |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> select * product where name like '%shirts';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'product where name like '%shirts'' at line 1
+mysql> select * from product where name like '%shirts';
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
+| line shirts    | clothing |   900 | levis | 7.2    |
++----------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from product where name='puma'and name='nike' and name='levis' and name like '%shirts';
+Empty set (0.00 sec)
+
+mysql> select * from product where brand='puma'and brand='nike' and brand='levis' and name like '%shirts';
+Empty set (0.00 sec)
+
+mysql> select * from product where brand='puma'or brand='nike' or brand='levis' or name like '%shirts';
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| blackshrit     | clothing |   900 | puma  | 4.8    |
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
+| line shirts    | clothing |   900 | levis | 7.2    |
++----------------+----------+-------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from product where brand='nike' or brand='levis'or brand='puma' and name like '%shirts';
++----------------+----------+-------+-------+--------+
+| name           | category | price | brand | rating |
++----------------+----------+-------+-------+--------+
+| checked shirts | clothing |   800 | nike  | 4.0    |
+| white shirts   | clothing |   500 | puma  | 5.2    |
+| line shirts    | clothing |   900 | levis | 7.2    |
++----------------+----------+-------+-------+--------+
+3 rows in set (0.00 sec)
+
+mysql> notee

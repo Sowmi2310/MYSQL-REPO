@@ -1,0 +1,887 @@
+mysql>  use travelling_details;
+Database changed
+mysql> select database();
++--------------------+
+| database()         |
++--------------------+
+| travelling_details |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> create table bus(
+    -> busid int(3),
+    -> routeno  int(3),
+    -> source varchar(10),
+    -> destination varchar(10),
+    -> strating_time  time));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 6
+mysql>  create table bus(
+    ->     -> busid int(3),
+    ->     -> routeno  int(3),
+    ->     -> source varchar(10),
+    ->     -> destination varchar(10),
+    ->     -> strating_time  time());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> busid int(3),
+    -> routeno  int(3),
+    -> source varchar(10),
+    -> desti' at line 2
+mysql> create table bus(
+    ->      busid int(3),
+    ->      routeno  int(3),
+    ->      source varchar(10),
+    ->     destination varchar(10),
+    ->      strating_time  time());
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '))' at line 6
+mysql> create table bus(
+    ->      busid int(3),
+    ->      routeno  int(3),
+    ->      source varchar(10),
+    ->     destination varchar(10),
+    ->      strating_time  time);
+Query OK, 0 rows affected, 2 warnings (0.21 sec)
+
+mysql> desc bus;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| busid         | int         | YES  |     | NULL    |       |
+| routeno       | int         | YES  |     | NULL    |       |
+| source        | varchar(10) | YES  |     | NULL    |       |
+| destination   | varchar(10) | YES  |     | NULL    |       |
+| strating_time | time        | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> create table(
+    -> dd
+    -> ';
+    '> ' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(
+dd
+';
+'' at line 1
+mysql> create table passengers(
+    -> passenger_id int(3),
+    -> passenger_name varchar(10),
+    -> gender char(1),
+    -> date_of_birth  date);
+Query OK, 0 rows affected, 1 warning (0.64 sec)
+
+mysql> desc passengers;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| passenger_id   | int         | YES  |     | NULL    |       |
+| passenger_name | varchar(10) | YES  |     | NULL    |       |
+| gender         | char(1)     | YES  |     | NULL    |       |
+| date_of_birth  | date        | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> create table book_tickets(
+    -> busid int(3),
+    -> passenger_id  int(3),
+    -> date_of_travel date,
+    -> no_of_seats int(3));
+Query OK, 0 rows affected, 3 warnings (0.22 sec)
+
+mysql> desc  book_tickets;
++----------------+------+------+-----+---------+-------+
+| Field          | Type | Null | Key | Default | Extra |
++----------------+------+------+-----+---------+-------+
+| busid          | int  | YES  |     | NULL    |       |
+| passenger_id   | int  | YES  |     | NULL    |       |
+| date_of_travel | date | YES  |     | NULL    |       |
+| no_of_seats    | int  | YES  |     | NULL    |       |
++----------------+------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into bus values(1,23,'chennai','salem','3:25:15');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into bus values(2,24,'salem','covai','7:25:15'),(3,36,'erode','bangalore'
+    -> ,'9:00:00'),(4,78,'erode','bangalore','9:00:00')
+    -> ' ;
+    '>  ' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' ;
+ '' at line 3
+mysql> insert into bus values(2,24,'salem','covai','7:25:15'),(3,36,'erode','bangalore'
+    -> ,'9:00:00'),(4,78,'erode','bangalore','9:00:00');
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from bus;
++-------+---------+---------+-------------+---------------+
+| busid | routeno | source  | destination | strating_time |
++-------+---------+---------+-------------+---------------+
+|     1 |      23 | chennai | salem       | 03:25:15      |
+|     2 |      24 | salem   | covai       | 07:25:15      |
+|     3 |      36 | erode   | bangalore   | 09:00:00      |
+|     4 |      78 | erode   | bangalore   | 09:00:00      |
++-------+---------+---------+-------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> insert  into passengers values(1,'ram','m','2002-02-05'),(2,'rai','m','2003-06-06'),(3,'suvi','f','2002-05-13'),(4,'rani','f','2004-04-08');
+Query OK, 4 rows affected (0.08 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from  passengers;
++--------------+----------------+--------+---------------+
+| passenger_id | passenger_name | gender | date_of_birth |
++--------------+----------------+--------+---------------+
+|            1 | ram            | m      | 2002-02-05    |
+|            2 | rai            | m      | 2003-06-06    |
+|            3 | suvi           | f      | 2002-05-13    |
+|            4 | rani           | f      | 2004-04-08    |
++--------------+----------------+--------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into book_tickets(11,21,'2023-02-21',3),(12,32,'2023-03-13',4),(13,34,'2023-03-14',2),(14,23,'2023-04-12',1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '11,21,'2023-02-21',3),(12,32,'2023-03-13',4),(13,34,'2023-03-14',2),(14,23,'2023' at line 1
+mysql> insert into book_tickets values(11,21,'2023-02-21',3),(12,32,'2023-03-13',4),(13,34,'2023-03-14',2),(14,23,'2023-04-12',1);
+Query OK, 4 rows affected (0.07 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from  book_tickets;
++-------+--------------+----------------+-------------+
+| busid | passenger_id | date_of_travel | no_of_seats |
++-------+--------------+----------------+-------------+
+|    11 |           21 | 2023-02-21     |           3 |
+|    12 |           32 | 2023-03-13     |           4 |
+|    13 |           34 | 2023-03-14     |           2 |
+|    14 |           23 | 2023-04-12     |           1 |
++-------+--------------+----------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table bus add bustype varchar(10);
+Query OK, 0 rows affected (0.10 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from  bus;
++-------+---------+---------+-------------+---------------+---------+
+| busid | routeno | source  | destination | strating_time | bustype |
++-------+---------+---------+-------------+---------------+---------+
+|     1 |      23 | chennai | salem       | 03:25:15      | NULL    |
+|     2 |      24 | salem   | covai       | 07:25:15      | NULL    |
+|     3 |      36 | erode   | bangalore   | 09:00:00      | NULL    |
+|     4 |      78 | erode   | bangalore   | 09:00:00      | NULL    |
++-------+---------+---------+-------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> alter table book_tickets  rename column date_of_travel to journey_date;
+Query OK, 0 rows affected (0.25 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from  bus;
++-------+---------+---------+-------------+---------------+---------+
+| busid | routeno | source  | destination | strating_time | bustype |
++-------+---------+---------+-------------+---------------+---------+
+|     1 |      23 | chennai | salem       | 03:25:15      | NULL    |
+|     2 |      24 | salem   | covai       | 07:25:15      | NULL    |
+|     3 |      36 | erode   | bangalore   | 09:00:00      | NULL    |
+|     4 |      78 | erode   | bangalore   | 09:00:00      | NULL    |
++-------+---------+---------+-------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from  book_tickets;
++-------+--------------+--------------+-------------+
+| busid | passenger_id | journey_date | no_of_seats |
++-------+--------------+--------------+-------------+
+|    11 |           21 | 2023-02-21   |           3 |
+|    12 |           32 | 2023-03-13   |           4 |
+|    13 |           34 | 2023-03-14   |           2 |
+|    14 |           23 | 2023-04-12   |           1 |
++-------+--------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table  passengers add mobilenum int(10),add email varchar(20);
+Query OK, 0 rows affected, 1 warning (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from  passengers;
++--------------+----------------+--------+---------------+-----------+-------+
+| passenger_id | passenger_name | gender | date_of_birth | mobilenum | email |
++--------------+----------------+--------+---------------+-----------+-------+
+|            1 | ram            | m      | 2002-02-05    |      NULL | NULL  |
+|            2 | rai            | m      | 2003-06-06    |      NULL | NULL  |
+|            3 | suvi           | f      | 2002-05-13    |      NULL | NULL  |
+|            4 | rani           | f      | 2004-04-08    |      NULL | NULL  |
++--------------+----------------+--------+---------------+-----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update passengers set mobilenum=9765483456,email='ram@gamil.com' where  passenger_id=1;
+ERROR 1264 (22003): Out of range value for column 'mobilenum' at row 1
+mysql> update passengers set mobilenum=976548345,email='ram@gamil.com' where  passenger_id=1;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update passengers set mobilenum=976548543,email='rai@gamil.com' where  passenger_id=2;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update passengers set mobilenum=978848543,email='suvi@gamil.com' where  passenger_id=3;
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update passengers set mobilenum=978877543,email='rani@gamil.com' where  passenger_id=4;
+Query OK, 1 row affected (0.06 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from passengers;
++--------------+----------------+--------+---------------+-----------+----------------+
+| passenger_id | passenger_name | gender | date_of_birth | mobilenum | email          |
++--------------+----------------+--------+---------------+-----------+----------------+
+|            1 | ram            | m      | 2002-02-05    | 976548345 | ram@gamil.com  |
+|            2 | rai            | m      | 2003-06-06    | 976548543 | rai@gamil.com  |
+|            3 | suvi           | f      | 2002-05-13    | 978848543 | suvi@gamil.com |
+|            4 | rani           | f      | 2004-04-08    | 978877543 | rani@gamil.com |
++--------------+----------------+--------+---------------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql>  select * from bus;
++-------+---------+---------+-------------+---------------+---------+
+| busid | routeno | source  | destination | strating_time | bustype |
++-------+---------+---------+-------------+---------------+---------+
+|     1 |      23 | chennai | salem       | 03:25:15      | NULL    |
+|     2 |      24 | salem   | covai       | 07:25:15      | NULL    |
+|     3 |      36 | erode   | bangalore   | 09:00:00      | NULL    |
+|     4 |      78 | erode   | bangalore   | 09:00:00      | NULL    |
++-------+---------+---------+-------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql>  select * from  book_tickets;
++-------+--------------+--------------+-------------+
+| busid | passenger_id | journey_date | no_of_seats |
++-------+--------------+--------------+-------------+
+|    11 |           21 | 2023-02-21   |           3 |
+|    12 |           32 | 2023-03-13   |           4 |
+|    13 |           34 | 2023-03-14   |           2 |
+|    14 |           23 | 2023-04-12   |           1 |
++-------+--------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select passenger_name,date_of_birth from  passengers where gender='m';
++----------------+---------------+
+| passenger_name | date_of_birth |
++----------------+---------------+
+| ram            | 2002-02-05    |
+| rai            | 2003-06-06    |
++----------------+---------------+
+2 rows in set (0.04 sec)
+
+mysql> alter table passengers rename column passenger_name to male_passenger;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from  passengers;
++--------------+----------------+--------+---------------+-----------+----------------+
+| passenger_id | male_passenger | gender | date_of_birth | mobilenum | email          |
++--------------+----------------+--------+---------------+-----------+----------------+
+|            1 | ram            | m      | 2002-02-05    | 976548345 | ram@gamil.com  |
+|            2 | rai            | m      | 2003-06-06    | 976548543 | rai@gamil.com  |
+|            3 | suvi           | f      | 2002-05-13    | 978848543 | suvi@gamil.com |
+|            4 | rani           | f      | 2004-04-08    | 978877543 | rani@gamil.com |
++--------------+----------------+--------+---------------+-----------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table passengers  rename column male_passenger to passenger_name;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select passenger_name,date_of_birth from  passengers where gender='m';
++----------------+---------------+
+| passenger_name | date_of_birth |
++----------------+---------------+
+| ram            | 2002-02-05    |
+| rai            | 2003-06-06    |
++----------------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> select passenger_name as 'male_passenger' from passengers where gender='m';
++----------------+
+| male_passenger |
++----------------+
+| ram            |
+| rai            |
++----------------+
+2 rows in set (0.01 sec)
+
+mysql> select * from  passengers where  date_of_birth ='march';
+ERROR 1525 (HY000): Incorrect DATE value: 'march'
+mysql> select * from  passengers where  date_of_birth =2002-05-13;
+Empty set, 1 warning (0.00 sec)
+
+mysql> select * from  passengers where  date_of_birth ='2002-05-13';
++--------------+----------------+--------+---------------+-----------+----------------+
+| passenger_id | passenger_name | gender | date_of_birth | mobilenum | email          |
++--------------+----------------+--------+---------------+-----------+----------------+
+|            3 | suvi           | f      | 2002-05-13    | 978848543 | suvi@gamil.com |
++--------------+----------------+--------+---------------+-----------+----------------+
+1 row in set (0.05 sec)
+
+mysql> select source from bus where source=erode;
+ERROR 1054 (42S22): Unknown column 'erode' in 'where clause'
+mysql> select source from bus where source='erode';
++--------+
+| source |
++--------+
+| erode  |
+| erode  |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bus where source='erode';
++-------+---------+--------+-------------+---------------+---------+
+| busid | routeno | source | destination | strating_time | bustype |
++-------+---------+--------+-------------+---------------+---------+
+|     3 |      36 | erode  | bangalore   | 09:00:00      | NULL    |
+|     4 |      78 | erode  | bangalore   | 09:00:00      | NULL    |
++-------+---------+--------+-------------+---------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bus where source='chennai';
++-------+---------+---------+-------------+---------------+---------+
+| busid | routeno | source  | destination | strating_time | bustype |
++-------+---------+---------+-------------+---------------+---------+
+|     1 |      23 | chennai | salem       | 03:25:15      | NULL    |
++-------+---------+---------+-------------+---------------+---------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> show databases;
++-------------------------------+
+| Database                      |
++-------------------------------+
+| college                       |
+| fs19                          |
+| hotel                         |
+| hotel_management_organization |
+| information_schema            |
+| mark                          |
+| mysql                         |
+| performance_schema            |
+| sakila                        |
+| stu12                         |
+| stud                          |
+| student_details               |
+| sys                           |
+| travelling_details            |
+| world                         |
++-------------------------------+
+15 rows in set (0.04 sec)
+
+mysql> use  travelling_details;
+Database changed
+mysql> select database();
++--------------------+
+| database()         |
++--------------------+
+| travelling_details |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from bus;
++-------+---------+---------+-------------+---------------+---------+
+| busid | routeno | source  | destination | strating_time | bustype |
++-------+---------+---------+-------------+---------------+---------+
+|     1 |      23 | chennai | salem       | 03:25:15      | NULL    |
+|     2 |      24 | salem   | covai       | 07:25:15      | NULL    |
+|     3 |      36 | erode   | bangalore   | 09:00:00      | NULL    |
+|     4 |      78 | erode   | bangalore   | 09:00:00      | NULL    |
++-------+---------+---------+-------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select routeno,source from bus where destination='covai';
++---------+--------+
+| routeno | source |
++---------+--------+
+|      24 | salem  |
++---------+--------+
+1 row in set (0.00 sec)
+
+mysql> select * from book_tickets;
++-------+--------------+--------------+-------------+
+| busid | passenger_id | journey_date | no_of_seats |
++-------+--------------+--------------+-------------+
+|    11 |           21 | 2023-02-21   |           3 |
+|    12 |           32 | 2023-03-13   |           4 |
+|    13 |           34 | 2023-03-14   |           2 |
+|    14 |           23 | 2023-04-12   |           1 |
++-------+--------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> update  book_tickets set no_of_seats=6 where busid=12;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from book_tickets;
++-------+--------------+--------------+-------------+
+| busid | passenger_id | journey_date | no_of_seats |
++-------+--------------+--------------+-------------+
+|    11 |           21 | 2023-02-21   |           3 |
+|    12 |           32 | 2023-03-13   |           6 |
+|    13 |           34 | 2023-03-14   |           2 |
+|    14 |           23 | 2023-04-12   |           1 |
++-------+--------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> update  book_tickets set no_of_seats=8 where busid=14;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from book_tickets;
++-------+--------------+--------------+-------------+
+| busid | passenger_id | journey_date | no_of_seats |
++-------+--------------+--------------+-------------+
+|    11 |           21 | 2023-02-21   |           3 |
+|    12 |           32 | 2023-03-13   |           6 |
+|    13 |           34 | 2023-03-14   |           2 |
+|    14 |           23 | 2023-04-12   |           8 |
++-------+--------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select no_of_seats from book_tickets where no_of_seats>5;
++-------------+
+| no_of_seats |
++-------------+
+|           6 |
+|           8 |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from book_tickets where no_of_seats>5;
++-------+--------------+--------------+-------------+
+| busid | passenger_id | journey_date | no_of_seats |
++-------+--------------+--------------+-------------+
+|    12 |           32 | 2023-03-13   |           6 |
+|    14 |           23 | 2023-04-12   |           8 |
++-------+--------------+--------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from bus where source='erode' and strating_time='09:00:00' and destination= 'bangalore';
++-------+---------+--------+-------------+---------------+---------+
+| busid | routeno | source | destination | strating_time | bustype |
++-------+---------+--------+-------------+---------------+---------+
+|     3 |      36 | erode  | bangalore   | 09:00:00      | NULL    |
+|     4 |      78 | erode  | bangalore   | 09:00:00      | NULL    |
++-------+---------+--------+-------------+---------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> notee
+mysql> create database emp_details;
+Query OK, 1 row affected (0.09 sec)
+
+mysql> use emp_details;
+Database changed
+mysql> select database();
++-------------+
+| database()  |
++-------------+
+| emp_details |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE emp (
+    ->   empno decimal(4,0) NOT NULL,
+    ->   ename varchar(10) default NULL,
+    ->   job varchar(9) default NULL,
+    ->   mgr decimal(4,0) default NULL,
+    ->   hiredate date default NULL,
+    ->   sal decimal(7,2) default NULL,
+    ->   comm decimal(7,2) default NULL,
+    ->   deptno decimal(2,0) default NULL
+    -> );
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> select * from  emp;
+Empty set (0.05 sec)
+
+mysql> desc emp;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| empno    | decimal(4,0) | NO   |     | NULL    |       |
+| ename    | varchar(10)  | YES  |     | NULL    |       |
+| job      | varchar(9)   | YES  |     | NULL    |       |
+| mgr      | decimal(4,0) | YES  |     | NULL    |       |
+| hiredate | date         | YES  |     | NULL    |       |
+| sal      | decimal(7,2) | YES  |     | NULL    |       |
+| comm     | decimal(7,2) | YES  |     | NULL    |       |
+| deptno   | decimal(2,0) | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> CREATE TABLE dept (
+    ->   deptno decimal(2,0) default NULL,
+    ->   dname varchar(14) default NULL,
+    ->   loc varchar(13) default NULL
+    -> );
+Query OK, 0 rows affected (0.22 sec)
+
+mysql> INSERT INTO emp VALUES ('7369','SMITH','CLERK','7902','1980-12-17','800.00',NULL,'20');
+Query OK, 1 row affected (0.07 sec)
+
+mysql> INSERT INTO emp VALUES ('7499','ALLEN','SALESMAN','7698','1981-02-20','1600.00','300.00','30');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO emp VALUES ('7521','WARD','SALESMAN','7698','1981-02-22','1250.00','500.00','30');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> INSERT INTO emp VALUES ('7566','JONES','MANAGER','7839','1981-04-02','2975.00',NULL,'20');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO emp VALUES ('7654','MARTIN','SALESMAN','7698','1981-09-28','1250.00','1400.00','30');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO emp VALUES ('7698','BLAKE','MANAGER','7839','1981-05-01','2850.00',NULL,'30');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO emp VALUES ('7782','CLARK','MANAGER','7839','1981-06-09','2450.00',NULL,'10');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO emp VALUES ('7788','SCOTT','ANALYST','7566','1982-12-09','3000.00',NULL,'20');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO emp VALUES ('7839','KING','PRESIDENT',NULL,'1981-11-17','5000.00',NULL,'10');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO emp VALUES ('7844','TURNER','SALESMAN','7698','1981-09-08','1500.00','0.00','30');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> INSERT INTO emp VALUES ('7876','ADAMS','CLERK','7788','1983-01-12','1100.00',NULL,'20');
+Query OK, 1 row affected (0.13 sec)
+
+mysql> INSERT INTO emp VALUES ('7900','JAMES','CLERK','7698','1981-12-03','950.00',NULL,'30');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO emp VALUES ('7902','FORD','ANALYST','7566','1981-12-03','3000.00',NULL,'20');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO emp VALUES ('7934','MILLER','CLERK','7782','1982-01-23','1300.00',NULL,'10');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from emp;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7698 | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |    NULL |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+14 rows in set (0.00 sec)
+
+mysql> INSERT INTO dept VALUES ('10','ACCOUNTING','NEW YORK');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> INSERT INTO dept VALUES ('20','RESEARCH','DALLAS');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> INSERT INTO dept VALUES ('30','SALES','CHICAGO');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO dept VALUES ('40','OPERATIONS','BOSTON');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from dept;
++--------+------------+----------+
+| deptno | dname      | loc      |
++--------+------------+----------+
+|     10 | ACCOUNTING | NEW YORK |
+|     20 | RESEARCH   | DALLAS   |
+|     30 | SALES      | CHICAGO  |
+|     40 | OPERATIONS | BOSTON   |
++--------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select ename,job,sal from emp where job='analyst' and sal>2000;
++-------+---------+---------+
+| ename | job     | sal     |
++-------+---------+---------+
+| SCOTT | ANALYST | 3000.00 |
+| FORD  | ANALYST | 3000.00 |
++-------+---------+---------+
+2 rows in set (0.03 sec)
+
+mysql> select * from emp where job='clerks' or job='salesman' or job='analyst' and deptno=10 or deptno=20;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from emp where job='clerks' or job='salesman' or job='analyst' or deptno=10 or deptno=20;
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK     | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+12 rows in set (0.00 sec)
+
+mysql> select * from emp where job='clerks' or job='salesman' or job='analyst' and deptno=10 or deptno=20;
++-------+--------+----------+------+------------+---------+---------+--------+
+| empno | ename  | job      | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+----------+------+------------+---------+---------+--------+
+|  7369 | SMITH  | CLERK    | 7902 | 1980-12-17 |  800.00 |    NULL |     20 |
+|  7499 | ALLEN  | SALESMAN | 7698 | 1981-02-20 | 1600.00 |  300.00 |     30 |
+|  7521 | WARD   | SALESMAN | 7698 | 1981-02-22 | 1250.00 |  500.00 |     30 |
+|  7566 | JONES  | MANAGER  | 7839 | 1981-04-02 | 2975.00 |    NULL |     20 |
+|  7654 | MARTIN | SALESMAN | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7788 | SCOTT  | ANALYST  | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7844 | TURNER | SALESMAN | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK    | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7902 | FORD   | ANALYST  | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
++-------+--------+----------+------+------------+---------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_emp_details |
++-----------------------+
+| dept                  |
+| emp                   |
++-----------------------+
+2 rows in set (0.03 sec)
+
+mysql> order by ename;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by ename' at line 1
+mysql> order by ename  from emp;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by ename  from emp' at line 1
+mysql> select emp orderby ename;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename' at line 1
+mysql> select emp order by ename;
+ERROR 1054 (42S22): Unknown column 'emp' in 'field list'
+mysql> select ename from emp orderby ename;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename' at line 1
+mysql> select * ename from emp where orderby ename;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename from emp where orderby ename' at line 1
+mysql> select * ename from emp where orderby ename desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename from emp where orderby ename desc' at line 1
+mysql> select * ename from emp where order by ename critiria;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ename from emp where order by ename critiria' at line 1
+mysql> select ename from emp where order by ename critiria;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by ename critiria' at line 1
+mysql> select ename from emp where order by critiria;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by critiria' at line 1
+mysql> select ename from emp where order by ename asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by ename asc' at line 1
+mysql> select ename from emp where order by name asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by name asc' at line 1
+mysql> select ename from emp where order by asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by asc' at line 1
+mysql> select ename from emp where order by ename;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by ename' at line 1
+mysql> select ename from emp where order by name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by name' at line 1
+mysql> select ename from emp where order by 'A';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order by 'A'' at line 1
+mysql> select ename from emp order by 'A';
++--------+
+| ename  |
++--------+
+| SMITH  |
+| ALLEN  |
+| WARD   |
+| JONES  |
+| MARTIN |
+| BLAKE  |
+| CLARK  |
+| SCOTT  |
+| KING   |
+| TURNER |
+| ADAMS  |
+| JAMES  |
+| FORD   |
+| MILLER |
++--------+
+14 rows in set (0.00 sec)
+
+mysql> select ename from emp order by critiria;
+ERROR 1054 (42S22): Unknown column 'critiria' in 'order clause'
+mysql> select ename from emp order by asc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'asc' at line 1
+mysql> select ename from emp order by ename;
++--------+
+| ename  |
++--------+
+| ADAMS  |
+| ALLEN  |
+| BLAKE  |
+| CLARK  |
+| FORD   |
+| JAMES  |
+| JONES  |
+| KING   |
+| MARTIN |
+| MILLER |
+| SCOTT  |
+| SMITH  |
+| TURNER |
+| WARD   |
++--------+
+14 rows in set (0.00 sec)
+
+mysql> select empno,ename,sal,sal+25/100 as "increment" from emp;
++-------+--------+---------+-----------+
+| empno | ename  | sal     | increment |
++-------+--------+---------+-----------+
+|  7369 | SMITH  |  800.00 |  800.2500 |
+|  7499 | ALLEN  | 1600.00 | 1600.2500 |
+|  7521 | WARD   | 1250.00 | 1250.2500 |
+|  7566 | JONES  | 2975.00 | 2975.2500 |
+|  7654 | MARTIN | 1250.00 | 1250.2500 |
+|  7698 | BLAKE  | 2850.00 | 2850.2500 |
+|  7782 | CLARK  | 2450.00 | 2450.2500 |
+|  7788 | SCOTT  | 3000.00 | 3000.2500 |
+|  7839 | KING   | 5000.00 | 5000.2500 |
+|  7844 | TURNER | 1500.00 | 1500.2500 |
+|  7876 | ADAMS  | 1100.00 | 1100.2500 |
+|  7900 | JAMES  |  950.00 |  950.2500 |
+|  7902 | FORD   | 3000.00 | 3000.2500 |
+|  7934 | MILLER | 1300.00 | 1300.2500 |
++-------+--------+---------+-----------+
+14 rows in set (0.00 sec)
+
+mysql> select ename  from emp where ename like 'a%' and ename like 'e%';
+Empty set (0.05 sec)
+
+mysql> select ename  from emp where ename like 'A%' and ename like 'E%';
+Empty set (0.00 sec)
+
+mysql> select ename  from emp where ename like 'A%' ;
++-------+
+| ename |
++-------+
+| ALLEN |
+| ADAMS |
++-------+
+2 rows in set (0.00 sec)
+
+mysql> select ename  from emp where ename like 'E%' ;
+Empty set (0.00 sec)
+
+mysql> select ename  from emp where ename like 'E' ;
+Empty set (0.00 sec)
+
+mysql> select ename  from emp where ename like 'A' ;
+Empty set (0.00 sec)
+
+mysql> select ename,job,deptno from emp where deptno=30;
++--------+----------+--------+
+| ename  | job      | deptno |
++--------+----------+--------+
+| ALLEN  | SALESMAN |     30 |
+| WARD   | SALESMAN |     30 |
+| MARTIN | SALESMAN |     30 |
+| BLAKE  | MANAGER  |     30 |
+| TURNER | SALESMAN |     30 |
+| JAMES  | CLERK    |     30 |
++--------+----------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select * from emp where mgr=7839;
++-------+-------+---------+------+------------+---------+------+--------+
+| empno | ename | job     | mgr  | hiredate   | sal     | comm | deptno |
++-------+-------+---------+------+------------+---------+------+--------+
+|  7566 | JONES | MANAGER | 7839 | 1981-04-02 | 2975.00 | NULL |     20 |
+|  7698 | BLAKE | MANAGER | 7839 | 1981-05-01 | 2850.00 | NULL |     30 |
+|  7782 | CLARK | MANAGER | 7839 | 1981-06-09 | 2450.00 | NULL |     10 |
++-------+-------+---------+------+------------+---------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from emp where hiredate>'1981-06-01';
++-------+--------+-----------+------+------------+---------+---------+--------+
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
++-------+--------+-----------+------+------------+---------+---------+--------+
+|  7654 | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 |     30 |
+|  7782 | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |    NULL |     10 |
+|  7788 | SCOTT  | ANALYST   | 7566 | 1982-12-09 | 3000.00 |    NULL |     20 |
+|  7839 | KING   | PRESIDENT | NULL | 1981-11-17 | 5000.00 |    NULL |     10 |
+|  7844 | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 |    0.00 |     30 |
+|  7876 | ADAMS  | CLERK     | 7788 | 1983-01-12 | 1100.00 |    NULL |     20 |
+|  7900 | JAMES  | CLERK     | 7698 | 1981-12-03 |  950.00 |    NULL |     30 |
+|  7902 | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |    NULL |     20 |
+|  7934 | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |    NULL |     10 |
++-------+--------+-----------+------+------------+---------+---------+--------+
+9 rows in set (0.00 sec)
+
+mysql> select * from emp where hiredate<='1981-06-01' between hiredate='1981-12-17';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '='1981-12-17'' at line 1
+mysql> select * from emp where hiredate<='1981-06-01' between hiredate>='1981-12-17';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '>='1981-12-17'' at line 1
+mysql> select * from emp where hiredate<='1981-06-01' and hiredate>='1981-12-17';
+Empty set (0.00 sec)
+
+mysql> select * from emp where hiredate<='1981-06-01' and hiredate>='1981-12-17';
+Empty set (0.00 sec)
+
+mysql> select * from emp where hiredate<='1981-06-01' and hiredate>='1980-12-17';
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | sal     | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7369 | SMITH | CLERK    | 7902 | 1980-12-17 |  800.00 |   NULL |     20 |
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7521 | WARD  | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7566 | JONES | MANAGER  | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from emp where hiredate<='1981-06-01' and hiredate>'1980-12-17';
++-------+-------+----------+------+------------+---------+--------+--------+
+| empno | ename | job      | mgr  | hiredate   | sal     | comm   | deptno |
++-------+-------+----------+------+------------+---------+--------+--------+
+|  7499 | ALLEN | SALESMAN | 7698 | 1981-02-20 | 1600.00 | 300.00 |     30 |
+|  7521 | WARD  | SALESMAN | 7698 | 1981-02-22 | 1250.00 | 500.00 |     30 |
+|  7566 | JONES | MANAGER  | 7839 | 1981-04-02 | 2975.00 |   NULL |     20 |
+|  7698 | BLAKE | MANAGER  | 7839 | 1981-05-01 | 2850.00 |   NULL |     30 |
++-------+-------+----------+------+------------+---------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select ename from emp where ename like '%A%' or like'%E%';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'like'%E%'' at line 1
+mysql> select ename from emp where ename like '%A%' or '%E%';
++--------+
+| ename  |
++--------+
+| ALLEN  |
+| WARD   |
+| MARTIN |
+| BLAKE  |
+| CLARK  |
+| ADAMS  |
+| JAMES  |
++--------+
+7 rows in set, 1 warning (0.00 sec)
+
+mysql> notee
