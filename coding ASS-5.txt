@@ -1,0 +1,282 @@
+mysql> create database boat_management;
+Query OK, 1 row affected (0.44 sec)
+
+mysql> use  boat_management;
+Database changed
+mysql> select database();
++-----------------+
+| database()      |
++-----------------+
+| boat_management |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> create table sailor(
+    -> sid int primary key,
+    -> name varchar(10) not null,d\
+    -> dob date
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'dob date
+';
+'' at line 4
+mysql> create table sailor(
+    ->      sid int primary key,
+    ->      name varchar(10) not null,
+    ->     dob date not null,
+    ->    gender char(1) check(gender in('m','f'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql>    gender char(1) check(gender in('m','f'));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gender char(1) check(gender in('m','f'))' at line 1
+mysql>  create table sailor(
+    ->      sid int primary key,
+    ->      name varchar(10) not null,
+    ->     dob date not null,
+    ->    gender char(1) check(gender in('m','f')));
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> create table boat (
+    -> bid int primary key,
+    -> btype char(1) check (btype in 'D','S'),
+    -> bname varchar(10)  unique,
+    -> color varchar(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D','S'),
+bname varchar(10)  unique,
+color varchar(10))' at line 3
+mysql> create table boat (
+    ->     -> bid int primary key,
+    ->     -> btype char(1) check (btype in 'D','S'),
+    ->     -> bname varchar(10)  unique,
+    ->     -> color varchar(15));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> bid int primary key,
+    -> btype char(1) check (btype in 'D','S'),
+    -> bn' at line 2
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in 'D','S'),
+    ->      bname varchar(10)  unique,
+    ->      color varchar(15));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D','S'),
+     bname varchar(10)  unique,
+     color varchar(15))' at line 3
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in 'D','S'),
+    ->      bname varchar(10)  primary key,
+    ->      color varchar(15) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D','S'),
+     bname varchar(10)  primary key,
+     color varchar(15) not null)' at line 3
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in 'D'and 'S'),
+    ->      bname varchar(10)  primary key,
+    ->      color varchar(15) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D'and 'S'),
+     bname varchar(10)  primary key,
+     color varchar(15) not nul' at line 3
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in 'D'and 'S'),
+    ->      bname varchar(10)  primary key,
+    ->      color char(15) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D'and 'S'),
+     bname varchar(10)  primary key,
+     color char(15) not null)' at line 3
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in 'D'and 'S'),
+    ->      bname varchar(10)  unique,
+    ->      color char(15) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D'and 'S'),
+     bname varchar(10)  unique,
+     color char(15) not null)' at line 3
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in 'D'and 'S'),
+    ->      bname varchar(10)  unique,
+    ->      color char(15) not null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''D'and 'S'),
+     bname varchar(10)  unique,
+     color char(15) not null)' at line 3
+mysql> create table boat (
+    ->      bid int primary key,
+    ->      btype char(1) check (btype in ('D'and 'S')),
+    ->      bname varchar(10)  unique,
+    ->      color char(15) not null);
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> create table sails(
+    -> sid int primary key,
+    -> bid int,
+    -> dot date not null,
+    -> shift char(1) check ( shift in 'FN' ,'AN'),
+    -> Terminal close -- exit!
+mysql> use  boat_management;
+Database changed
+mysql> select database();
++-----------------+
+| database()      |
++-----------------+
+| boat_management |
++-----------------+
+1 row in set (0.20 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_boat_management |
++---------------------------+
+| boat                      |
+| sailor                    |
++---------------------------+
+2 rows in set (0.97 sec)
+
+mysql> desc boat;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| bid   | int         | NO   | PRI | NULL    |       |
+| btype | char(1)     | YES  |     | NULL    |       |
+| bname | varchar(10) | YES  | UNI | NULL    |       |
+| color | char(15)    | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.54 sec)
+
+mysql> desc sailor;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| sid    | int         | NO   | PRI | NULL    |       |
+| name   | varchar(10) | NO   |     | NULL    |       |
+| dob    | date        | NO   |     | NULL    |       |
+| gender | char(1)     | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> create table (
+    -> sid int primary key,
+    -> bid int,
+    -> sid int primary key,
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(
+sid int primary key,
+bid int,
+sid int primary key,
+';
+'' at line 1
+mysql> create table sails(
+    ->      sid int primary key,
+    ->      bid int,
+    ->      dot date not null,
+    ->      shift char(2) check (shift in('FN','AN'))),
+    -> foreign key(bid) references boat(bid) on delete set null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+foreign key(bid) references boat(bid) on delete set null)' at line 5
+mysql> create table sails(
+    ->     ->      sid int primary key,
+    ->     ->      bid int,
+    ->     ->      dot date not null,
+    ->     ->      shift char(2) check (shift in('FN','AN')),
+    ->     -> foreign key(bid) references boat(bid) on delete set null);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '->      sid int primary key,
+    ->      bid int,
+    ->      dot date not null,' at line 2
+mysql> create table sails(
+    ->           sid int primary key,
+    ->           bid int,
+    ->           dot date not null,
+    ->           shift char(2) check (shift in('FN','AN')),
+    ->      foreign key(bid) references boat(bid) on delete set null);
+Query OK, 0 rows affected (1.15 sec)
+
+mysql> show tables;
++---------------------------+
+| Tables_in_boat_management |
++---------------------------+
+| boat                      |
+| sailor                    |
+| sails                     |
++---------------------------+
+3 rows in set (0.04 sec)
+
+mysql> insert into sailor values(2,'ram','2002-08-12','m'),(6,'raj','2008-08-12','m'),(8,'suvi','2009-08-12','f');
+Query OK, 3 rows affected (0.23 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from sailor;
++-----+------+------------+--------+
+| sid | name | dob        | gender |
++-----+------+------------+--------+
+|   2 | ram  | 2002-08-12 | m      |
+|   6 | raj  | 2008-08-12 | m      |
+|   8 | suvi | 2009-08-12 | f      |
++-----+------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into boat  values(2,'D','rocky','pink'),(4,'S','tower','black'),(6,'D','book','blue'),(8,'S','seeler','green');
+ERROR 3819 (HY000): Check constraint 'boat_chk_1' is violated.
+mysql> (2,D,'rocky','pink'),(4,S,'tower','black'),(6,D,'book','blue'),(8,S,'seeler','green');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2,D,'rocky','pink'),(4,S,'tower','black'),(6,D,'book','blue'),(8,S,'seeler','gre' at line 1
+mysql> (2,D,'rocky','pink'),(4,S,'tower','black'),(6,D,'book','blue'),(8,S,'seeler','green');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2,D,'rocky','pink'),(4,S,'tower','black'),(6,D,'book','blue'),(8,S,'seeler','gre' at line 1
+mysql> (2,'D','rocky','pink'),(4,'S','tower','black'),(6,'D','book','blue'),(8,'S','seeler','green');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2,'D','rocky','pink'),(4,'S','tower','black'),(6,'D','book','blue'),(8,'S','seel' at line 1
+mysql> (2,D,rocky,'pink'),(4,S,tower,'black'),(6,D,book,'blue'),(8,S,seeler,'green');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2,D,rocky,'pink'),(4,S,tower,'black'),(6,D,book,'blue'),(8,S,seeler,'green')' at line 1
+mysql> (2,D,rocky,pink),(4,S,tower,black),(6,D,book,blue),(8,S,seeler,green);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2,D,rocky,pink),(4,S,tower,black),(6,D,book,blue),(8,S,seeler,green)' at line 1
+mysql> (2,D,rocky,pink),(4,S,tower,black),(6,D,book,blue),(8,S,seeler,green);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2,D,rocky,pink),(4,S,tower,black),(6,D,book,blue),(8,S,seeler,green)' at line 1
+mysql> insert into boat values(2,D,rocky,pink),(4,S,tower,black),(6,D,book,blue),(8,S,seeler,green);
+ERROR 1054 (42S22): Unknown column 'D' in 'field list'
+mysql> insert into boat values(2,'D',rocky,pink),(4,'S',tower,black),(6,'D',book,blue),(8,'S',seeler,green);
+ERROR 1054 (42S22): Unknown column 'rocky' in 'field list'
+mysql> insert into boat values(2,'D','rocky',pink),(4,'S','tower',black),(6,'D','book',blue),(8,'S','seeler',green);
+ERROR 1054 (42S22): Unknown column 'pink' in 'field list'
+mysql> insert into boat values(2,'D','rocky','pink'),(4,'S','tower','black'),(6,'D','book','blue'),(8,'S','seeler','green');
+ERROR 3819 (HY000): Check constraint 'boat_chk_1' is violated.
+mysql> Terminal close -- exit!
+mysql> show tables;
++---------------------------+
+| Tables_in_boat_management |
++---------------------------+
+| boat                      |
+| boates                    |
+| sail                      |
+| sailor                    |
+| sails                     |
++---------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from sailor;
++-----+------+------------+--------+
+| sid | name | dob        | gender |
++-----+------+------------+--------+
+|   2 | ram  | 2002-08-12 | m      |
+|   6 | raj  | 2008-08-12 | m      |
+|   8 | suvi | 2009-08-12 | f      |
++-----+------+------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select * from boates;
++-----+-------+--------+-------+
+| bid | btype | bname  | color |
++-----+-------+--------+-------+
+|   1 | D     | rocky  | pink  |
+|   2 | D     | varlex | brown |
+|   3 | S     | magic  | black |
++-----+-------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from sail;
++-----+------+------------+-------+
+| sid | bid  | dot        | shift |
++-----+------+------------+-------+
+|   2 |    1 | 2020-08-03 | FN    |
+|   4 |    2 | 2012-04-05 | AN    |
+|   6 |    3 | 2019-05-07 | AN    |
++-----+------+------------+-------+
+3 rows in set (0.00 sec)
+
+mysql> notee;

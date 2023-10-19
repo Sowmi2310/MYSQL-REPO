@@ -1,0 +1,385 @@
+mysql> select e.ename,e.job,e.sal,d.dname ,d.deptno from emp e join dept d
+    -> where e.dept no = d.dept;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'no = d.dept' at line 2
+mysql> where e.dept no = d.dept no;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where e.dept no = d.dept no' at line 1
+mysql> select e.ename,e.job,e.sal,d.dname ,d.deptno from emp e join dept d
+    -> where e.deptno = d.deptno;
++--------+-----------+---------+------------+--------+
+| ename  | job       | sal     | dname      | deptno |
++--------+-----------+---------+------------+--------+
+| SMITH  | CLERK     |  800.00 | RESEARCH   |     20 |
+| ALLEN  | SALESMAN  | 1600.00 | SALES      |     30 |
+| WARD   | SALESMAN  | 1250.00 | SALES      |     30 |
+| JONES  | MANAGER   | 2975.00 | RESEARCH   |     20 |
+| MARTIN | SALESMAN  | 1250.00 | SALES      |     30 |
+| BLAKE  | MANAGER   | 2850.00 | SALES      |     30 |
+| CLARK  | MANAGER   | 2450.00 | ACCOUNTING |     10 |
+| SCOTT  | ANALYST   | 3000.00 | RESEARCH   |     20 |
+| KING   | PRESIDENT | 5000.00 | ACCOUNTING |     10 |
+| TURNER | SALESMAN  | 1500.00 | SALES      |     30 |
+| ADAMS  | CLERK     | 1100.00 | RESEARCH   |     20 |
+| JAMES  | CLERK     |  950.00 | SALES      |     30 |
+| FORD   | ANALYST   | 3000.00 | RESEARCH   |     20 |
+| MILLER | CLERK     | 1300.00 | ACCOUNTING |     10 |
++--------+-----------+---------+------------+--------+
+14 rows in set (0.00 sec)
+
+mysql> select e.job from emp e join dept p
+    -> where e.deptno = d.deptno and loc ='DALLAS';
+ERROR 1054 (42S22): Unknown column 'd.deptno' in 'where clause'
+mysql> select e.job from emp e join dept p
+    -> where e.deptno = d.deptno and d.loc ='DALLAS';
+ERROR 1054 (42S22): Unknown column 'd.deptno' in 'where clause'
+mysql> select e.job from emp e join dept p
+    ->      where (e.deptno = d.deptno) and d.loc ='DALLAS';
+ERROR 1054 (42S22): Unknown column 'd.deptno' in 'where clause'
+mysql> select e.job from emp e join dept d
+    ->      where (e.deptno = d.deptno) and d.loc ='DALLAS';
++---------+
+| job     |
++---------+
+| CLERK   |
+| MANAGER |
+| ANALYST |
+| CLERK   |
+| ANALYST |
++---------+
+5 rows in set (0.00 sec)
+
+mysql> select e.ename,e.job,e.sal,g.grade from emp e,grade g where e.sal between g.s_local and g.s_hisal;
++--------+-----------+---------+-------+
+| ename  | job       | sal     | grade |
++--------+-----------+---------+-------+
+| SMITH  | CLERK     |  800.00 |     1 |
+| ALLEN  | SALESMAN  | 1600.00 |     2 |
+| WARD   | SALESMAN  | 1250.00 |     2 |
+| JONES  | MANAGER   | 2975.00 |     2 |
+| MARTIN | SALESMAN  | 1250.00 |     2 |
+| BLAKE  | MANAGER   | 2850.00 |     2 |
+| CLARK  | MANAGER   | 2450.00 |     2 |
+| SCOTT  | ANALYST   | 3000.00 |     2 |
+| KING   | PRESIDENT | 5000.00 |     3 |
+| TURNER | SALESMAN  | 1500.00 |     2 |
+| ADAMS  | CLERK     | 1100.00 |     2 |
+| JAMES  | CLERK     |  950.00 |     1 |
+| FORD   | ANALYST   | 3000.00 |     2 |
+| MILLER | CLERK     | 1300.00 |     2 |
++--------+-----------+---------+-------+
+14 rows in set (0.00 sec)
+
+mysql>  select job as 'dept_name',count(ename) as 'no.of.employees' from emp group by job;
++-----------+-----------------+
+| dept_name | no.of.employees |
++-----------+-----------------+
+| CLERK     |               4 |
+| SALESMAN  |               4 |
+| MANAGER   |               3 |
+| ANALYST   |               2 |
+| PRESIDENT |               1 |
++-----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,g.grade,g.loc from emp e join grade g where e.deptno =g.deptno;
++-------+--------+-----------+-------+---------+
+| empno | ename  | job       | grade | loc     |
++-------+--------+-----------+-------+---------+
+|  7369 | SMITH  | CLERK     |     2 | covai   |
+|  7499 | ALLEN  | SALESMAN  |     3 | salem   |
+|  7521 | WARD   | SALESMAN  |     3 | salem   |
+|  7566 | JONES  | MANAGER   |     2 | covai   |
+|  7654 | MARTIN | SALESMAN  |     3 | salem   |
+|  7698 | BLAKE  | MANAGER   |     3 | salem   |
+|  7782 | CLARK  | MANAGER   |     1 | chennai |
+|  7788 | SCOTT  | ANALYST   |     2 | covai   |
+|  7839 | KING   | PRESIDENT |     1 | chennai |
+|  7844 | TURNER | SALESMAN  |     3 | salem   |
+|  7876 | ADAMS  | CLERK     |     2 | covai   |
+|  7900 | JAMES  | CLERK     |     3 | salem   |
+|  7902 | FORD   | ANALYST   |     2 | covai   |
+|  7934 | MILLER | CLERK     |     1 | chennai |
++-------+--------+-----------+-------+---------+
+14 rows in set (0.00 sec)
+
+mysql> e.empno,e.ename,d.deptno,d.dname from emp e join dept d
+    -> where e.depto =
+    -> ';
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'e.empno,e.ename,d.deptno,d.dname from emp e join dept d
+where e.depto =
+';
+'' at line 1
+mysql> select e.empno,e.ename,d.deptno,d.dname from emp e join dept d
+    -> where (d.deptno = e.deptno) and d.deptno =null;
+Empty set (0.00 sec)
+
+mysql>  select e.empno,e.ename,d.deptno,d.dname from emp e right join dept d
+    ->     -> where (d.deptno = e.deptno) and e.empno =null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> where (d.deptno = e.deptno) and e.empno =null' at line 2
+mysql> select e.empno,e.ename,d.deptno,d.dname from emp e right join dept d
+    ->    where (d.deptno = e.deptno) and e.empno =null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where (d.deptno = e.deptno) and e.empno =null' at line 2
+mysql> select e.empno,e.ename,d.deptno,d.dname from emp e right join dept d
+    ->    where (d.deptno = e.deptno) and e.empno is null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where (d.deptno = e.deptno) and e.empno is null' at line 2
+mysql> select e.empno,e.ename,d.deptno,d.dname from emp e right join dept d
+    ->    on (d.deptno = e.deptno) and e.empno is null;
++-------+-------+--------+------------+
+| empno | ename | deptno | dname      |
++-------+-------+--------+------------+
+|  NULL | NULL  |     10 | ACCOUNTING |
+|  NULL | NULL  |     20 | RESEARCH   |
+|  NULL | NULL  |     30 | SALES      |
+|  NULL | NULL  |     40 | OPERATIONS |
++-------+-------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select d.deptno,d.dname from emp e right join dept d
+    ->    on (d.deptno = e.deptno) and e.empno is null;
++--------+------------+
+| deptno | dname      |
++--------+------------+
+|     10 | ACCOUNTING |
+|     20 | RESEARCH   |
+|     30 | SALES      |
+|     40 | OPERATIONS |
++--------+------------+
+4 rows in set (0.00 sec)
+
+mysql>  select d.deptno,d.dname from emp e right join dept d
+    ->         on (d.deptno = e.deptno) where e.empno is null;
++--------+------------+
+| deptno | dname      |
++--------+------------+
+|     40 | OPERATIONS |
++--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select e.ename as 'employees',m.ename as 'manager' from emp e,emp m where e.mgr=m.empno;
++-----------+---------+
+| employees | manager |
++-----------+---------+
+| FORD      | JONES   |
+| SCOTT     | JONES   |
+| JAMES     | BLAKE   |
+| TURNER    | BLAKE   |
+| MARTIN    | BLAKE   |
+| WARD      | BLAKE   |
+| ALLEN     | BLAKE   |
+| MILLER    | CLARK   |
+| ADAMS     | SCOTT   |
+| CLARK     | KING    |
+| BLAKE     | KING    |
+| JONES     | KING    |
+| SMITH     | FORD    |
++-----------+---------+
+13 rows in set (0.00 sec)
+
+mysql> Terminal close -- exit!
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null
+    ->     union
+    ->     select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+------+--------+------------+--------+
+| empno | ename | job  | deptno | dname      | loc    |
++-------+-------+------+--------+------------+--------+
+|  NULL | NULL  | NULL |     40 | OPERATIONS | BOSTON |
++-------+-------+------+--------+------------+--------+
+1 row in set (0.04 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.deptno is null
+    ->     union
+    ->     select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+------+--------+------------+--------+
+| empno | ename | job  | deptno | dname      | loc    |
++-------+-------+------+--------+------------+--------+
+|  NULL | NULL  | NULL |     40 | OPERATIONS | BOSTON |
++-------+-------+------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->     -> on (e.deptno=d.deptno)
+    ->     -> where d.loc is null
+    ->     -> union
+    ->     -> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->     -> on (e.deptno=d.deptno)
+    ->     -> where e.ename is null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> on (e.deptno=d.deptno)
+    -> where d.loc is null
+    -> union
+    -> select ' at line 2
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null
+    ->     union
+    ->     select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+------+--------+------------+--------+
+| empno | ename | job  | deptno | dname      | loc    |
++-------+-------+------+--------+------------+--------+
+|  NULL | NULL  | NULL |     40 | OPERATIONS | BOSTON |
++-------+-------+------+--------+------------+--------+
+1 row in set (0.03 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null
+    ->     union all
+    ->     select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+------+--------+------------+--------+
+| empno | ename | job  | deptno | dname      | loc    |
++-------+-------+------+--------+------------+--------+
+|  NULL | NULL  | NULL |     40 | OPERATIONS | BOSTON |
++-------+-------+------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null
+    ->     union 
+    ->     select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+------+--------+------------+--------+
+| empno | ename | job  | deptno | dname      | loc    |
++-------+-------+------+--------+------------+--------+
+|  NULL | NULL  | NULL |     40 | OPERATIONS | BOSTON |
++-------+-------+------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null;
+Empty set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e  join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null;
+Empty set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.deptno is null;
+Empty set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null
+    ->      union
+    ->      select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+------+--------+------------+--------+
+| empno | ename | job  | deptno | dname      | loc    |
++-------+-------+------+--------+------------+--------+
+|  NULL | NULL  | NULL |     40 | OPERATIONS | BOSTON |
++-------+-------+------+--------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null;
+Empty set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.comm =0.00;
++-------+--------+----------+--------+-------+---------+
+| empno | ename  | job      | deptno | dname | loc     |
++-------+--------+----------+--------+-------+---------+
+|  7844 | TURNER | SALESMAN |     30 | SALES | CHICAGO |
++-------+--------+----------+--------+-------+---------+
+1 row in set (0.07 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null;
+Empty set (0.00 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      union
+    ->      select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno);
++-------+--------+-----------+--------+------------+----------+
+| empno | ename  | job       | deptno | dname      | loc      |
++-------+--------+-----------+--------+------------+----------+
+|  7369 | SMITH  | CLERK     |     20 | RESEARCH   | DALLAS   |
+|  7499 | ALLEN  | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7521 | WARD   | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7566 | JONES  | MANAGER   |     20 | RESEARCH   | DALLAS   |
+|  7654 | MARTIN | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7698 | BLAKE  | MANAGER   |     30 | SALES      | CHICAGO  |
+|  7782 | CLARK  | MANAGER   |     10 | ACCOUNTING | NEW YORK |
+|  7788 | SCOTT  | ANALYST   |     20 | RESEARCH   | DALLAS   |
+|  7839 | KING   | PRESIDENT |     10 | ACCOUNTING | NEW YORK |
+|  7844 | TURNER | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7876 | ADAMS  | CLERK     |     20 | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | CLERK     |     30 | SALES      | CHICAGO  |
+|  7902 | FORD   | ANALYST   |     20 | RESEARCH   | DALLAS   |
+|  7934 | MILLER | CLERK     |     10 | ACCOUNTING | NEW YORK |
+|  NULL | NULL   | NULL      |     40 | OPERATIONS | BOSTON   |
++-------+--------+-----------+--------+------------+----------+
+15 rows in set (0.00 sec)
+
+mysql> 
+mysql> update emp set deptno=null
+    ->     -> where ename='ward';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> where ename='ward'' at line 2
+mysql> update emp set deptno=null
+    ->      where ename='ward';
+Query OK, 1 row affected (0.30 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      union
+    ->      select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno);
++-------+--------+-----------+--------+------------+----------+
+| empno | ename  | job       | deptno | dname      | loc      |
++-------+--------+-----------+--------+------------+----------+
+|  7369 | SMITH  | CLERK     |     20 | RESEARCH   | DALLAS   |
+|  7499 | ALLEN  | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7521 | WARD   | SALESMAN  |   NULL | NULL       | NULL     |
+|  7566 | JONES  | MANAGER   |     20 | RESEARCH   | DALLAS   |
+|  7654 | MARTIN | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7698 | BLAKE  | MANAGER   |     30 | SALES      | CHICAGO  |
+|  7782 | CLARK  | MANAGER   |     10 | ACCOUNTING | NEW YORK |
+|  7788 | SCOTT  | ANALYST   |     20 | RESEARCH   | DALLAS   |
+|  7839 | KING   | PRESIDENT |     10 | ACCOUNTING | NEW YORK |
+|  7844 | TURNER | SALESMAN  |     30 | SALES      | CHICAGO  |
+|  7876 | ADAMS  | CLERK     |     20 | RESEARCH   | DALLAS   |
+|  7900 | JAMES  | CLERK     |     30 | SALES      | CHICAGO  |
+|  7902 | FORD   | ANALYST   |     20 | RESEARCH   | DALLAS   |
+|  7934 | MILLER | CLERK     |     10 | ACCOUNTING | NEW YORK |
+|  NULL | NULL   | NULL      |     40 | OPERATIONS | BOSTON   |
++-------+--------+-----------+--------+------------+----------+
+15 rows in set (0.04 sec)
+
+mysql> select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e left join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where d.loc is null
+    ->     union 
+    ->     select e.empno,e.ename,e.job,d.deptno,d.dname,d.loc from emp e right join dept d
+    ->      on (e.deptno=d.deptno)
+    ->      where e.ename is null;
++-------+-------+----------+--------+------------+--------+
+| empno | ename | job      | deptno | dname      | loc    |
++-------+-------+----------+--------+------------+--------+
+|  7521 | WARD  | SALESMAN |   NULL | NULL       | NULL   |
+|  NULL | NULL  | NULL     |     40 | OPERATIONS | BOSTON |
++-------+-------+----------+--------+------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> notee

@@ -1,0 +1,342 @@
+mysql> create database college;
+ERROR 1007 (HY000): Can't create database 'college'; database exists
+mysql> create database student_details;
+Query OK, 1 row affected (0.10 sec)
+
+mysql> use student_details;
+Database changed
+mysql> select database();
++-----------------+
+| database()      |
++-----------------+
+| student_details |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> create table student_profile(
+          rollno int(2),
+         name varchar(10),
+         DOB date,
+          department varchar(20),
+          city varchar(10));
+Query OK, 0 rows affected, 1 warning (0.25 sec)
+
+mysql> desc student_profile;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| rollno     | int         | YES  |     | NULL    |       |
+| name       | varchar(10) | YES  |     | NULL    |       |
+| DOB        | date        | YES  |     | NULL    |       |
+| department | varchar(20) | YES  |     | NULL    |       |
+| city       | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.07 sec)
+
+mysql> create table  marks(
+    -> rollno int(2),
+    -> name varchar(10),
+    -> mark1 int(2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> create table  marks(
+    ->     -> rollno int(2),
+    ->     -> name varchar(10),
+    ->     -> mark1 int(2);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> rollno int(2),
+    -> name varchar(10),
+    -> mark1 int(2)' at line 2
+mysql> create table  marks(
+    ->      rollno int(2),
+    ->      name varchar(10),
+    ->      mark1 int(2),
+    ->      mark2 int(2));
+Query OK, 0 rows affected, 3 warnings (0.16 sec)
+
+mysql> desc marks;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| rollno | int         | YES  |     | NULL    |       |
+| name   | varchar(10) | YES  |     | NULL    |       |
+| mark1  | int         | YES  |     | NULL    |       |
+| mark2  | int         | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student_profile values(1,'ram','2002-06-23','cs','covai'),(2,'suvi','2003-07-21','IT','chennai'),(3,'raj',2003-02-24','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-08','IT','chennai');
+    '> 
+    '> 
+    '> insert into student_profile values(1,'ram','2002-06-23','cs','covai'),(2,'suvi','2003-07-21','IT','chennai'),(3,'raj',2003-02-24','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-08','IT','chennai');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-' at line 1
+mysql> insert into student_profile values(1,'ram','2002-06-23','cs','covai'),(2,'suvi','2003-07-21','IT','chennai'),(3,'raj',2003-02-24','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-08','IT','chennai');
+    '> 
+    '> desc marks;
+    '> create table  marks(
+    '>     -> mark1 int(2);
+    '> 
+    '> 
+    '> create table  marks(
+    '> ';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-' at line 1
+mysql> insert into student_profile values(1,'ram','2002-06-23','cs','covai'),(2,'suvi','2003-07-21','IT','chennai'),(3,'raj','2003
+    '> -02-24','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-08','IT','chennai');
+ERROR 1292 (22007): Incorrect date value: '2003
+-02-24' for column 'DOB' at row 3
+mysql> 
+mysql> insert into student_profile values(1,'ram','2002-06-23','cs','covai'),(2,'suvi','2003-07-21','IT','chennai'),(3,'raj','2003
+    '> -02-24','IT','chennai'),(4,'ragul','2023-02-11','maths','salem'),(5,'logesh','2003-03-08','IT','chennai');
+ERROR 1292 (22007): Incorrect date value: '2003
+-02-24' for column 'DOB' at row 3
+mysql> 
+mysql> insert into student_profile values(1,'ram','2002-06-23','cs','covai'),(2,'suvi','2003-07-21','IT','chennai'),(3,'raj','2003-02-24','IT','chennai'),(4,'ragul','2003-02-11','maths','salem'),(5,'logesh','2003-03-08','IT','chennai');
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from student_profile;
++--------+--------+------------+------------+---------+
+| rollno | name   | DOB        | department | city    |
++--------+--------+------------+------------+---------+
+|      1 | ram    | 2002-06-23 | cs         | covai   |
+|      2 | suvi   | 2003-07-21 | IT         | chennai |
+|      3 | raj    | 2003-02-24 | IT         | chennai |
+|      4 | ragul  | 2003-02-11 | maths      | salem   |
+|      5 | logesh | 2003-03-08 | IT         | chennai |
++--------+--------+------------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> insert into marks(1,'ram',84,58),(2,'ragul',98,78),(3,'rijul',22,48),(4,'sam',78,67),(5,'reena',93,89);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'ram',84,58),(2,'ragul',98,78),(3,'rijul',22,48),(4,'sam',78,67),(5,'reena',93' at line 1
+mysql> insert into marks values(1,'ram',84,58),(2,'ragul',98,78),(3,'rijul',22,48),(4,'sam',78,67),(5,'reena',93,89);
+Query OK, 5 rows affected (0.07 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+
+| rollno | name  | mark1 | mark2 |
++--------+-------+-------+-------+
+|      1 | ram   |    84 |    58 |
+|      2 | ragul |    98 |    78 |
+|      3 | rijul |    22 |    48 |
+|      4 | sam   |    78 |    67 |
+|      5 | reena |    93 |    89 |
++--------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table marks add total int(4);
+Query OK, 0 rows affected, 1 warning (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+
+| rollno | name  | mark1 | mark2 | total |
++--------+-------+-------+-------+-------+
+|      1 | ram   |    84 |    58 |  NULL |
+|      2 | ragul |    98 |    78 |  NULL |
+|      3 | rijul |    22 |    48 |  NULL |
+|      4 | sam   |    78 |    67 |  NULL |
+|      5 | reena |    93 |    89 |  NULL |
++--------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table marks rename column DOB to date_of_birth;
+ERROR 1054 (42S22): Unknown column 'DOB' in 'marks'
+mysql> alter table  rename student_profile column DOB to date_of_birth;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rename student_profile column DOB to date_of_birth' at line 1
+mysql> alter table  rename student_profile column DOB to dateofbirth;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'rename student_profile column DOB to dateofbirth' at line 1
+mysql> Terminal close -- exit!
+mysql> select * from student_details
+    -> select * from student_details;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select * from student_details' at line 2
+mysql> alter table marks add grade varchar(10);
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |    NULL | NULL  |
+|      2 | ragul |    98 |    78 |   176 |    NULL | NULL  |
+|      3 | rijul |    22 |    48 |    70 |    NULL | NULL  |
+|      4 | sam   |    78 |    67 |   145 |    NULL | NULL  |
+|      5 | reena |    93 |    89 |   182 |    NULL | NULL  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set average=total/5;
+Query OK, 5 rows affected (0.19 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql>  select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | NULL  |
+|      2 | ragul |    98 |    78 |   176 |      35 | NULL  |
+|      3 | rijul |    22 |    48 |    70 |      14 | NULL  |
+|      4 | sam   |    78 |    67 |   145 |      29 | NULL  |
+|      5 | reena |    93 |    89 |   182 |      36 | NULL  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set mark2=96 where rollno=2;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | NULL  |
+|      2 | ragul |    98 |    96 |   176 |      35 | NULL  |
+|      3 | rijul |    22 |    48 |    70 |      14 | NULL  |
+|      4 | sam   |    78 |    67 |   145 |      29 | NULL  |
+|      5 | reena |    93 |    89 |   182 |      36 | NULL  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set average=total/5;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 5  Changed: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | NULL  |
+|      2 | ragul |    98 |    96 |   176 |      35 | NULL  |
+|      3 | rijul |    22 |    48 |    70 |      14 | NULL  |
+|      4 | sam   |    78 |    67 |   145 |      29 | NULL  |
+|      5 | reena |    93 |    89 |   182 |      36 | NULL  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set total=mark1+mark2;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 5  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | NULL  |
+|      2 | ragul |    98 |    96 |   194 |      35 | NULL  |
+|      3 | rijul |    22 |    48 |    70 |      14 | NULL  |
+|      4 | sam   |    78 |    67 |   145 |      29 | NULL  |
+|      5 | reena |    93 |    89 |   182 |      36 | NULL  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set mark11 and mark2 > 40 ='pass'
+    -> ';
+    '> ;
+    '> ' ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and mark2 > 40 ='pass'
+';
+;
+'' at line 1
+mysql> update marks set mark11 and mark2 > 40 ='pass';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and mark2 > 40 ='pass'' at line 1
+mysql> update marks set grade=mark1 and mark2 > 40 ="pass";
+ERROR 1292 (22007): Truncated incorrect DOUBLE value: 'pass'
+mysql> update marks set grade='pass' where mark1 and mark2 > 40;
+Query OK, 5 rows affected (0.15 sec)
+Rows matched: 5  Changed: 5  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | pass  |
+|      2 | ragul |    98 |    96 |   194 |      35 | pass  |
+|      3 | rijul |    22 |    48 |    70 |      14 | pass  |
+|      4 | sam   |    78 |    67 |   145 |      29 | pass  |
+|      5 | reena |    93 |    89 |   182 |      36 | pass  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set mark1=32,mark2=35 where rollno=rijul;
+ERROR 1054 (42S22): Unknown column 'rijul' in 'where clause'
+mysql> update marks set mark1=32,mark2=35 where rollno=3;
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | pass  |
+|      2 | ragul |    98 |    96 |   194 |      35 | pass  |
+|      3 | rijul |    32 |    35 |    70 |      14 | pass  |
+|      4 | sam   |    78 |    67 |   145 |      29 | pass  |
+|      5 | reena |    93 |    89 |   182 |      36 | pass  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update marks set grade='fail' where mark1 and mark2 < 40;
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+---------+-------+
+| rollno | name  | mark1 | mark2 | total | average | grade |
++--------+-------+-------+-------+-------+---------+-------+
+|      1 | ram   |    84 |    58 |   142 |      28 | pass  |
+|      2 | ragul |    98 |    96 |   194 |      35 | pass  |
+|      3 | rijul |    32 |    35 |    70 |      14 | fail  |
+|      4 | sam   |    78 |    67 |   145 |      29 | pass  |
+|      5 | reena |    93 |    89 |   182 |      36 | pass  |
++--------+-------+-------+-------+-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter marks delete average;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'marks delete average' at line 1
+mysql> alter table marks delete column average;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'delete column average' at line 1
+mysql> alter table marks drop column average;
+Query OK, 0 rows affected (0.82 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+-------+
+| rollno | name  | mark1 | mark2 | total | grade |
++--------+-------+-------+-------+-------+-------+
+|      1 | ram   |    84 |    58 |   142 | pass  |
+|      2 | ragul |    98 |    96 |   194 | pass  |
+|      3 | rijul |    32 |    35 |    70 | fail  |
+|      4 | sam   |    78 |    67 |   145 | pass  |
+|      5 | reena |    93 |    89 |   182 | pass  |
++--------+-------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> set auto commit=0;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'commit=0' at line 1
+mysql> commit;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from marks;
++--------+-------+-------+-------+-------+-------+
+| rollno | name  | mark1 | mark2 | total | grade |
++--------+-------+-------+-------+-------+-------+
+|      1 | ram   |    84 |    58 |   142 | pass  |
+|      2 | ragul |    98 |    96 |   194 | pass  |
+|      3 | rijul |    32 |    35 |    70 | fail  |
+|      4 | sam   |    78 |    67 |   145 | pass  |
+|      5 | reena |    93 |    89 |   182 | pass  |
++--------+-------+-------+-------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> turncate table marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncate table marks' at line 1
+mysql> turncate table marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncate table marks' at line 1
+mysql> turncate table marks;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'turncate table marks' at line 1
+mysql> truncate table marks;
+Query OK, 0 rows affected (0.47 sec)
+
+mysql> select * from marks;
+Empty set (0.01 sec)
+
+mysql> notee
