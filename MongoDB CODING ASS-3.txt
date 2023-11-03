@@ -1,0 +1,498 @@
+studentdetails> db.createCollection("marks")
+{ ok: 1 }
+studentdetails> db.marks.insertMany([
+...  {_id:2,name:'sachin',course:'B.E CSE',m1:99,m2:34,m3:90,subjects:['HTML','CSS','MongoDB'],age:18,dob:'17-09-2001'},
+...  {_id:3,name:'kumar',course:'B.E.CSE',m1:21,m2:15,m3:20,subjects:['HTML','CSS','MongoDB'],age:22,dob:'27-09-2007'},
+...  {_id:4,name:'sai',course:'B.SC.CS',m1:26,m2:14,m3:15,subjects:['HTML','CSS','MongoDB'],age:25,dob:'19-06-2001'},
+...  {_id:5,name:'jai',course:'B.E EEE',m1:31,m2:95,m3:90,subjects:['HTML','CSS','MongoDB'],age:20,dob:'22-02-2008'},
+...  {_id:6,name:'lesath',course:'B.E.CSC',m1:71,m2:75,m3:90,subjects:['HTML','MongoDB'],age:19,dob:'13-11-2003'},
+...  {_id:7,name:'suvi',course:'B.E.Mech',m1:77,m2:25,m3:80,subjects:['HTML','MongoDB'],age:34,dob:'17-12-2007'},
+...  {_id:8,name:'pavithra',course:'B.E.CS',m1:34,m2:85,m3:50,subjects:['HTML','CSS','MongoDB'],age:24,dob:'17-09-2002'},
+...  {_id:9,name:'rethika',course:'B.E.CS',m1:90,m2:43,m3:86,subjects:['HTML','CSS','MongoDB'],age:20,dob:'16-10-2001'},
+...  {_id:10,name:'suba',course:'B.E.IT',m1:98,m2:88,m3:99,subjects:['HTML','MongoDB'],age:21,dob:'28-09-2005'},
+...  {_id:11,name:'nandha',course:'B.E.CSE',m1:97,m2:10,m3:60,subjects:['HTML','CSS','MongoDB'],age:23,dob:'13-05-2002'}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 2,
+    '1': 3,
+    '2': 4,
+    '3': 5,
+    '4': 6,
+    '5': 7,
+    '6': 8,
+    '7': 9,
+    '8': 10,
+    '9': 11
+  }
+}
+studentdetails> db.marks.find().pretty()
+[
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    m1: 99,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 18,
+    dob: '17-09-2001'
+  },
+  {
+    _id: 3,
+    name: 'kumar',
+    course: 'B.E.CSE',
+    m1: 21,
+    m2: 15,
+    m3: 20,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 22,
+    dob: '27-09-2007'
+  },
+  {
+    _id: 4,
+    name: 'sai',
+    course: 'B.SC.CS',
+    m1: 26,
+    m2: 14,
+    m3: 15,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 25,
+    dob: '19-06-2001'
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    m1: 31,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '22-02-2008'
+  },
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    m1: 71,
+    m2: 75,
+    m3: 90,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 19,
+    dob: '13-11-2003'
+  },
+  {
+    _id: 7,
+    name: 'suvi',
+    course: 'B.E.Mech',
+    m1: 77,
+    m2: 25,
+    m3: 80,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 34,
+    dob: '17-12-2007'
+  },
+  {
+    _id: 8,
+    name: 'pavithra',
+    course: 'B.E.CS',
+    m1: 34,
+    m2: 85,
+    m3: 50,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 24,
+    dob: '17-09-2002'
+  },
+  {
+    _id: 9,
+    name: 'rethika',
+    course: 'B.E.CS',
+    m1: 90,
+    m2: 43,
+    m3: 86,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '16-10-2001'
+  },
+  {
+    _id: 10,
+    name: 'suba',
+    course: 'B.E.IT',
+    m1: 98,
+    m2: 88,
+    m3: 99,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 21,
+    dob: '28-09-2005'
+  },
+  {
+    _id: 11,
+    name: 'nandha',
+    course: 'B.E.CSE',
+    m1: 97,
+    m2: 10,
+    m3: 60,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 23,
+    dob: '13-05-2002'
+  }
+]
+studentdetails> db.marks.find({$and:[{},{m1:{$gt:40},m2:{$gt:40},m3:{$gt:40}}]})
+[
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    m1: 71,
+    m2: 75,
+    m3: 90,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 19,
+    dob: '13-11-2003'
+  },
+  {
+    _id: 9,
+    name: 'rethika',
+    course: 'B.E.CS',
+    m1: 90,
+    m2: 43,
+    m3: 86,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '16-10-2001'
+  },
+  {
+    _id: 10,
+    name: 'suba',
+    course: 'B.E.IT',
+    m1: 98,
+    m2: 88,
+    m3: 99,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 21,
+    dob: '28-09-2005'
+  }
+]
+studentdetails> db.marks.find({m1:{$lt:30},m2:{$lt:30},m3:{$lt:30}},{name:1,course:1})
+[
+  { _id: 3, name: 'kumar', course: 'B.E.CSE' },
+  { _id: 4, name: 'sai', course: 'B.SC.CS' }
+
+]
+studentdetails> db.marks.find({m1:{$gt:90},m2:{$lt:30},m3:{$gt:50}},{name:1,course:1,m1:1,m2:2,m3:3})
+[
+  {
+    _id: 11,
+    name: 'nandha',
+    course: 'B.E.CSE',
+    m1: 97,
+    m2: 10,
+    m3: 60
+  }
+]
+
+studentdetails> db.marks.find({subjects:{$in:['HTML','MongoDB']}})
+[
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    m1: 99,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 18,
+    dob: '17-09-2001'
+  },
+  {
+    _id: 3,
+    name: 'kumar',
+    course: 'B.E.CSE',
+    m1: 21,
+    m2: 15,
+    m3: 20,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 22,
+    dob: '27-09-2007'
+  },
+  {
+    _id: 4,
+    name: 'sai',
+    course: 'B.SC.CS',
+    m1: 26,
+    m2: 14,
+    m3: 15,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 25,
+    dob: '19-06-2001'
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    m1: 31,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '22-02-2008'
+  },
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    m1: 71,
+    m2: 75,
+    m3: 90,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 19,
+    dob: '13-11-2003'
+  },
+  {
+    _id: 7,
+    name: 'suvi',
+    course: 'B.E.Mech',
+    m1: 77,
+    m2: 25,
+    m3: 80,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 34,
+    dob: '17-12-2007'
+  },
+  {
+    _id: 8,
+    name: 'pavithra',
+    course: 'B.E.CS',
+    m1: 34,
+    m2: 85,
+    m3: 50,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 24,
+    dob: '17-09-2002'
+  },
+  {
+    _id: 9,
+    name: 'rethika',
+    course: 'B.E.CS',
+    m1: 90,
+    m2: 43,
+    m3: 86,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '16-10-2001'
+  },
+  {
+    _id: 10,
+    name: 'suba',
+    course: 'B.E.IT',
+    m1: 98,
+    m2: 88,
+    m3: 99,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 21,
+    dob: '28-09-2005'
+  },
+  {
+    _id: 11,
+    name: 'nandha',
+    course: 'B.E.CSE',
+    m1: 97,
+    m2: 10,
+    m3: 60,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 23,
+    dob: '13-05-2002'
+  }
+]
+studentdetails> db.marks.find({age:{$lt:21}},{})
+[
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    m1: 99,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 18,
+    dob: '17-09-2001'
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    m1: 31,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '22-02-2008'
+  },
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    m1: 71,
+    m2: 75,
+    m3: 90,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 19,
+    dob: '13-11-2003'
+  },
+  {
+    _id: 9,
+    name: 'rethika',
+    course: 'B.E.CS',
+    m1: 90,
+    m2: 43,
+    m3: 86,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '16-10-2001'
+  }
+]
+studentdetails> db.marks.find({}).limit(2)
+[
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    m1: 99,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 18,
+    dob: '17-09-2001'
+  },
+  {
+    _id: 3,
+    name: 'kumar',
+    course: 'B.E.CSE',
+    m1: 21,
+    m2: 15,
+    m3: 20,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 22,
+    dob: '27-09-2007'
+  }
+]
+studentdetails> db.marks.find({}).limit(2).skip(2)
+[
+  {
+    _id: 4,
+    name: 'sai',
+    course: 'B.SC.CS',
+    m1: 26,
+    m2: 14,
+    m3: 15,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 25,
+    dob: '19-06-2001'
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    m1: 31,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '22-02-2008'
+  }
+]
+studentdetails> db.marks.find({},{name:1}).sort({name:1})
+[
+  { _id: 5, name: 'jai' },
+  { _id: 3, name: 'kumar' },
+  { _id: 6, name: 'lesath' },
+  { _id: 11, name: 'nandha' },
+  { _id: 8, name: 'pavithra' },
+  { _id: 9, name: 'rethika' },
+  { _id: 2, name: 'sachin' },
+  { _id: 4, name: 'sai' },
+  { _id: 10, name: 'suba' },
+  { _id: 7, name: 'suvi' }
+]
+
+
+studentdetails> db.marks.find({},{name:1}).sort({name:-1})
+[
+  { _id: 7, name: 'suvi' },
+  { _id: 10, name: 'suba' },
+  { _id: 4, name: 'sai' },
+  { _id: 2, name: 'sachin' },
+  { _id: 9, name: 'rethika' },
+  { _id: 8, name: 'pavithra' },
+  { _id: 11, name: 'nandha' },
+  { _id: 6, name: 'lesath' },
+  { _id: 3, name: 'kumar' },
+  { _id: 5, name: 'jai' }
+]
+
+studentdetails> db.marks.find({},{dob:1}).sort({dob:1})
+[
+  { _id: 11, dob: '13-05-2002' },
+  { _id: 6, dob: '13-11-2003' },
+  { _id: 9, dob: '16-10-2001' },
+  { _id: 2, dob: '17-09-2001' },
+  { _id: 8, dob: '17-09-2002' },
+  { _id: 7, dob: '17-12-2007' },
+  { _id: 4, dob: '19-06-2001' },
+  { _id: 5, dob: '22-02-2008' },
+  { _id: 3, dob: '27-09-2007' },
+  { _id: 10, dob: '28-09-2005' }
+]
+
+studentdetails> db.marks.find({},{dob:1}).sort({dob:-1})
+[
+  { _id: 10, dob: '28-09-2005' },
+  { _id: 3, dob: '27-09-2007' },
+  { _id: 5, dob: '22-02-2008' },
+  { _id: 4, dob: '19-06-2001' },
+  { _id: 7, dob: '17-12-2007' },
+  { _id: 8, dob: '17-09-2002' },
+  { _id: 2, dob: '17-09-2001' },
+  { _id: 9, dob: '16-10-2001' },
+  { _id: 6, dob: '13-11-2003' },
+  { _id: 11, dob: '13-05-2002' }
+]
+
+studentdetails> db.marks.find({}).limit(3).skip(2)
+[
+  {
+    _id: 4,
+    name: 'sai',
+    course: 'B.SC.CS',
+    m1: 26,
+    m2: 14,
+    m3: 15,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 25,
+    dob: '19-06-2001'
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    m1: 31,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    age: 20,
+    dob: '22-02-2008'
+  },
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    m1: 71,
+    m2: 75,
+    m3: 90,
+    subjects: [ 'HTML', 'MongoDB' ],
+    age: 19,
+    dob: '13-11-2003'
+  }
+]

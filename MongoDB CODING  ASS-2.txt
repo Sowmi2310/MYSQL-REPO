@@ -1,0 +1,416 @@
+emp_details> use studentdetails
+switched to db studentdetails
+studentdetails> db.createCollection("students_table")
+{ ok: 1 }
+studentdetails> db.students_table.insertOne({_id:1,name:'logesh',course:'B.SC.IT',m1:99,m2:95,m3:90,subjects:['HTML','CSS','MongoDB'],personal:{age:22,dob:'23-09-2022',fathername:'ravi',mobilenumber:8976543278,email:'logesh@gmail.com',address:{place:'covai',houseno:1}}})
+{ acknowledged: true, insertedId: 1 }
+studentdetails> db.students_table.insertMany([
+... {_id:2,name:'sachin',course:'B.E CSE',m1:99,m2:34,m3:90,subjects:['HTML','CSS','MongoDB'],personal:{age:24,dob:'24-09-2022',fathername:'ravi',mobilenumber:9976543278,email:'sachin@gmail.com',address:{place:'covai',houseno:2}}},
+... {_id:3,name:'kumar',course:'B.E.CSE',m1:71,m2:95,m3:90,subjects:['HTML','CSS','MongoDB'],personal:{age:22,dob:'17-09-2021',fathername:'ragul',mobilenumber:8976543279,email:'kumar@gmail.com',address:{place:'salem',houseno:3}}},
+... {_id:4,name:'sai',course:'B.SC.CS',m1:66,m2:34,m3:90,subjects:['HTML','CSS','MongoDB'],personal:{age:22,dob:'23-09-2022',fathername:'ravi',mobilenumber:9976543279,eemail:'sai@gmail.com',address:{place:'covai',houseno:1}}},
+... {_id:5,name:'jai',course:'B.E EEE',m1:31,m2:95,m3:90,subjects:['HTML','CSS','MongoDB'],personal:{age:22,dob:'17-09-2021',fathername:'gopal',mobilenumber:8979543279,email:'jai@gmail.com',address:{place:'bangalore',houseno:3}}},
+... {_id:6,name:'lesath',course:'B.E.CSC',m1:71,m2:75,m3:90,subjects:['HTML','CSS','MongoDB'],personal:{age:23,dob:'19-09-2021',fathername:'ragul',mobilenumber:9976543279,email:'leshath@gmail.com',address:{place:'salem',houseno:5}}},
+... {_id:7,name:'suvi',course:'B.E.Mech',m1:77,m2:25,m3:80,subjects:['HTML','CSS','MongoDB'],personal:{age:21,dob:'17-09-2021',fathername:'gokul',mobilenumber:9976543279,email:'suvi@gmail.com',address:{place:'salem',houseno:7}}},
+... {_id:8,name:'pavithra',course:'B.E.CS',m1:34,m2:85,m3:50,subjects:['HTML','CSS','MongoDB'],personal:{age:24,dob:'17-09-2021',fathername:'ramsamy',mobilenumber:9076543279,email:'pavi@gmail.com',address:{place:'chennai',houseno:12}}},
+... {_id:9,name:'rethika',course:'B.E.CS',m1:90,m2:43,m3:86,subjects:['HTML','CSS','MongoDB'],personal:{age:20,dob:'17-09-2021',fathername:'gowtham',mobilenumber:8976545279,email:'rethika@gmail.com',address:{place:'kerala',houseno:9}}},
+... {_id:10,name:'suba',course:'B.E.IT',m1:98,m2:88,m3:99,subjects:['HTML','CSS','MongoDB'],personal:{age:21,dob:'17-09-2021',fathername:'ragul',mobilenumber:9976500279,email:'suba@gmail.com',address:{place:'mumbai',houseno:5}}},
+... {_id:11,name:'nandha',course:'B.E.CSE',m1:97,m2:95,m3:60,subjects:['HTML','CSS','MongoDB'],personal:{age:23,dob:'17-09-2021',fathername:'ramji',mobilenumber:9976000279,email:'nandha@gmail.com',address:{place:'pune',houseno:22}}}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': 2,
+    '1': 3,
+    '2': 4,
+    '3': 5,
+    '4': 6,
+    '5': 7,
+    '6': 8,
+    '7': 9,
+    '8': 10,
+    '9': 11
+  }
+}
+studentdetails> db.students_table.find().pretty();
+[
+  {
+    _id: 1,
+    name: 'logesh',
+    course: 'B.SC.IT',
+    m1: 99,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 22,
+      dob: '23-09-2022',
+      fathername: 'ravi',
+      mobilenumber: 8976543278,
+      email: 'logesh@gmail.com',
+      address: { place: 'covai', houseno: 1 }
+    }
+  },
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    m1: 99,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 24,
+      dob: '24-09-2022',
+      fathername: 'ravi',
+      mobilenumber: 9976543278,
+      email: 'sachin@gmail.com',
+      address: { place: 'covai', houseno: 2 }
+    }
+  },
+  {
+    _id: 3,
+    name: 'kumar',
+    course: 'B.E.CSE',
+    m1: 71,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 22,
+      dob: '17-09-2021',
+      fathername: 'ragul',
+      mobilenumber: 8976543279,
+      email: 'kumar@gmail.com',
+      address: { place: 'salem', houseno: 3 }
+    }
+  },
+  {
+    _id: 4,
+    name: 'sai',
+    course: 'B.SC.CS',
+    m1: 66,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 22,
+      dob: '23-09-2022',
+      fathername: 'ravi',
+      mobilenumber: 9976543279,
+      email: 'sai@gmail.com',
+      address: { place: 'covai', houseno: 1 }
+    }
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    m1: 31,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 22,
+      dob: '17-09-2021',
+      fathername: 'gopal',
+      mobilenumber: 8979543279,
+      email: 'jai@gmail.com',
+      address: { place: 'bangalore', houseno: 3 }
+    }
+  },
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    m1: 71,
+    m2: 75,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 23,
+      dob: '19-09-2021',
+      fathername: 'ragul',
+      mobilenumber: 9976543279,
+      email: 'leshath@gmail.com',
+      address: { place: 'salem', houseno: 5 }
+    }
+  },
+  {
+    _id: 7,
+    name: 'suvi',
+    course: 'B.E.Mech',
+    m1: 77,
+    m2: 25,
+    m3: 80,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 21,
+      dob: '17-09-2021',
+      fathername: 'gokul',
+      mobilenumber: 9976543279,
+      email: 'suvi@gmail.com',
+      address: { place: 'salem', houseno: 7 }
+    }
+  },
+  {
+    _id: 8,
+    name: 'pavithra',
+    course: 'B.E.CS',
+    m1: 34,
+    m2: 85,
+    m3: 50,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 24,
+      dob: '17-09-2021',
+      fathername: 'ramsamy',
+      mobilenumber: 9076543279,
+      email: 'pavi@gmail.com',
+      address: { place: 'chennai', houseno: 12 }
+    }
+  },
+  {
+    _id: 9,
+    name: 'rethika',
+    course: 'B.E.CS',
+    m1: 90,
+    m2: 43,
+    m3: 86,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 20,
+      dob: '17-09-2021',
+      fathername: 'gowtham',
+      mobilenumber: 8976545279,
+      email: 'rethika@gmail.com',
+      address: { place: 'kerala', houseno: 9 }
+    }
+  },
+  {
+    _id: 10,
+    name: 'suba',
+    course: 'B.E.IT',
+    m1: 98,
+    m2: 88,
+    m3: 99,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 21,
+      dob: '17-09-2021',
+      fathername: 'ragul',
+      mobilenumber: 9976500279,
+      email: 'suba@gmail.com',
+      address: { place: 'mumbai', houseno: 5 }
+    }
+  },
+  {
+    _id: 11,
+    name: 'nandha',
+    course: 'B.E.CSE',
+    m1: 97,
+    m2: 95,
+    m3: 60,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 23,
+      dob: '17-09-2021',
+      fathername: 'ramji',
+      mobilenumber: 9976000279,
+      email: 'nandha@gmail.com',
+      address: { place: 'pune', houseno: 22 }
+    }
+  }
+]
+studentdetails> db.students_table.find({}).limit(1);
+[
+  {
+    _id: 1,
+    name: 'logesh',
+    course: 'B.SC.IT',
+    m1: 99,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 22,
+      dob: '23-09-2022',
+      fathername: 'ravi',
+      mobilenumber: 8976543278,
+      email: 'logesh@gmail.com',
+      address: { place: 'covai', houseno: 1 }
+    }
+  }
+]
+studentdetails> db.students_table.find({course:'B.E.CSE'})
+[
+  {
+    _id: 3,
+    name: 'kumar',
+    course: 'B.E.CSE',
+    m1: 71,
+    m2: 95,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 22,
+      dob: '17-09-2021',
+      fathername: 'ragul',
+      mobilenumber: 8976543279,
+      email: 'kumar@gmail.com',
+      address: { place: 'salem', houseno: 3 }
+    }
+  },
+  {
+    _id: 11,
+    name: 'nandha',
+    course: 'B.E.CSE',
+    m1: 97,
+    m2: 95,
+    m3: 60,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 23,
+      dob: '17-09-2021',
+      fathername: 'ramji',
+      mobilenumber: 9976000279,
+      email: 'nandha@gmail.com',
+      address: { place: 'pune', houseno: 22 }
+    }
+  }
+]
+studentdetails> db.students_table.aggregate([{$project:{name:1}}]);
+[
+  { _id: 1, name: 'logesh' },
+  { _id: 2, name: 'sachin' },
+  { _id: 3, name: 'kumar' },
+  { _id: 4, name: 'sai' },
+  { _id: 5, name: 'jai' },
+  { _id: 6, name: 'lesath' },
+  { _id: 7, name: 'suvi' },
+  { _id: 8, name: 'pavithra' },
+  { _id: 9, name: 'rethika' },
+  { _id: 10, name: 'suba' },
+  { _id: 11, name: 'nandha' }
+]
+studentdetails> db.students_table.aggregate([{$project:{name:1,course:1,personal:{mobilenumber:1}}}]);
+[
+  {
+    _id: 1,
+    name: 'logesh',
+    course: 'B.SC.IT',
+    personal: { mobilenumber: 8976543278 }
+  },
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    personal: { mobilenumber: 9976543278 }
+  },
+  {
+    _id: 3,
+    name: 'kumar',
+    course: 'B.E.CSE',
+    personal: { mobilenumber: 8976543279 }
+  },
+  {
+    _id: 4,
+    name: 'sai',
+    course: 'B.SC.CS',
+    personal: { mobilenumber: 9976543279 }
+  },
+  {
+    _id: 5,
+    name: 'jai',
+    course: 'B.E EEE',
+    personal: { mobilenumber: 8979543279 }
+  },
+  {
+    _id: 6,
+    name: 'lesath',
+    course: 'B.E.CSC',
+    personal: { mobilenumber: 9976543279 }
+  },
+  {
+    _id: 7,
+    name: 'suvi',
+    course: 'B.E.Mech',
+    personal: { mobilenumber: 9976543279 }
+  },
+  {
+    _id: 8,
+    name: 'pavithra',
+    course: 'B.E.CS',
+    personal: { mobilenumber: 9076543279 }
+  },
+  {
+    _id: 9,
+    name: 'rethika',
+    course: 'B.E.CS',
+    personal: { mobilenumber: 8976545279 }
+  },
+  {
+    _id: 10,
+    name: 'suba',
+    course: 'B.E.IT',
+    personal: { mobilenumber: 9976500279 }
+  },
+  {
+    _id: 11,
+    name: 'nandha',
+    course: 'B.E.CSE',
+    personal: { mobilenumber: 9976000279 }
+  }
+]
+studentdetails> db.students_table.find({m1:{$gt:70}},{name:1})
+[
+  { _id: 1, name: 'logesh' },
+  { _id: 2, name: 'sachin' },
+  { _id: 3, name: 'kumar' },
+  { _id: 6, name: 'lesath' },
+  { _id: 7, name: 'suvi' },
+  { _id: 9, name: 'rethika' },
+  { _id: 10, name: 'suba' },
+  { _id: 11, name: 'nandha' }
+]
+studentdetails> db.students_table.find({m2:{$lt:70}},{name:1})
+[
+  { _id: 2, name: 'sachin' },
+  { _id: 4, name: 'sai' },
+  { _id: 7, name: 'suvi' },
+  { _id: 9, name: 'rethika' }
+]
+
+studentdetails> db.students_table.find({name:'sachin'})
+[
+  {
+    _id: 2,
+    name: 'sachin',
+    course: 'B.E CSE',
+    m1: 99,
+    m2: 34,
+    m3: 90,
+    subjects: [ 'HTML', 'CSS', 'MongoDB' ],
+    personal: {
+      age: 24,
+      dob: '24-09-2022',
+      fathername: 'ravi',
+      mobilenumber: 9976543278,
+      email: 'sachin@gmail.com',
+      address: { place: 'covai', houseno: 2 }
+    }
+  }
+]
+studentdetails> db.students_table.find({name:'sachin'},{name:1})
+[ { _id: 2, name: 'sachin' } ]
+studentdetails> db.students_table.find({name:{$ne:'sachin'}},{name:1})
+[
+  { _id: 1, name: 'logesh' },
+  { _id: 3, name: 'kumar' },
+  { _id: 4, name: 'sai' },
+  { _id: 5, name: 'jai' },
+  { _id: 6, name: 'lesath' },
+  { _id: 7, name: 'suvi' },
+  { _id: 8, name: 'pavithra' },
+  { _id: 9, name: 'rethika' },
+  { _id: 10, name: 'suba' },
+  { _id: 11, name: 'nandha' }
+]

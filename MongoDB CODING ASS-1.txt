@@ -1,0 +1,311 @@
+test> db.createCollection("studentdetails")
+{ ok: 1 }
+test> db.studentdetails.insertMany([{name:'ram',age:21,score:87},{name:'suvi',age:19,score:77},{name:'raj',age:23,score:76},{name:'ramu',age:20,score:77},{name:'ragul',age:21,score:87},{name:'banu',age:25,score:97}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6533933f31abe8002eb01f69"),
+    '1': ObjectId("6533933f31abe8002eb01f6a"),
+    '2': ObjectId("6533933f31abe8002eb01f6b"),
+    '3': ObjectId("6533933f31abe8002eb01f6c"),
+    '4': ObjectId("6533933f31abe8002eb01f6d"),
+    '5': ObjectId("6533933f31abe8002eb01f6e")
+  }
+}
+test> db.studentdetails.find().pretty()
+[
+  {
+    _id: ObjectId("6533933f31abe8002eb01f69"),
+    name: 'ram',
+    age: 21,
+    score: 87
+  },
+  {
+    _id: ObjectId("6533933f31abe8002eb01f6a"),
+    name: 'suvi',
+    age: 19,
+    score: 77
+  },
+  {
+    _id: ObjectId("6533933f31abe8002eb01f6b"),
+    name: 'raj',
+    age: 23,
+    score: 76
+  },
+  {
+    _id: ObjectId("6533933f31abe8002eb01f6c"),
+    name: 'ramu',
+    age: 20,
+    score: 77
+  },
+  {
+    _id: ObjectId("6533933f31abe8002eb01f6d"),
+    name: 'ragul',
+    age: 21,
+    score: 87
+  },
+  {
+    _id: ObjectId("6533933f31abe8002eb01f6e"),
+    name: 'banu',
+    age: 25,
+    score: 97
+  }
+]
+test> use e-commerce_application
+switched to db e-commerce_application
+e-commerce_application> db.createCollection("customer")
+{ ok: 1 }
+
+e-commerce_application> db.customer.insertMany([{customerid:12,firstname:'sai',lastname:'kumar',DOB:'23.10.2002',address:{houseno:6,city:"covai"},phoneno:9963782564},
+... {customerid:13,firstname:'logesh',lastname:'kumar',DOB:'08.03.2003',address:{houseno:8,city:"salem"},phoneno:9863782564},
+... {customerid:14,firstname:'nandha',lastname:'kumar',DOB:'25.05.2005',address:{houseno:4,city:"bangalore"},phoneno:9963785264},
+... {customerid:15,firstname:'ragul',lastname:'R',DOB:'13.08.2002',address:{houseno:1,city:"namakkal"},phoneno:9063782564},
+... {customerid:16,firstname:'rammu',lastname:'U',DOB:'23.07.2002',address:{houseno:12,city:"covai"},phoneno:99637002564},
+... {customerid:18,firstname:'santhosh',lastname:'K',DOB:'23.12.2002',address:{houseno:13,city:"chennai"},phoneno:9963782456}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("65339a8d31abe8002eb01f6f"),
+    '1': ObjectId("65339a8d31abe8002eb01f70"),
+    '2': ObjectId("65339a8d31abe8002eb01f71"),
+    '3': ObjectId("65339a8d31abe8002eb01f72"),
+    '4': ObjectId("65339a8d31abe8002eb01f73"),
+    '5': ObjectId("65339a8d31abe8002eb01f74")
+  }
+}
+e-commerce_application> db.customer.find().pretty()
+[
+  {
+    _id: ObjectId("65339a8d31abe8002eb01f6f"),
+    customerid: 12,
+    firstname: 'sai',
+    lastname: 'kumar',
+    DOB: '23.10.2002',
+    address: { houseno: 6, city: 'covai' },
+    phoneno: 9963782564
+  },
+  {
+    _id: ObjectId("65339a8d31abe8002eb01f70"),
+    customerid: 13,
+    firstname: 'logesh',
+    lastname: 'kumar',
+    DOB: '08.03.2003',
+    address: { houseno: 8, city: 'salem' },
+    phoneno: 9863782564
+  },
+  {
+    _id: ObjectId("65339a8d31abe8002eb01f71"),
+    customerid: 14,
+    firstname: 'nandha',
+    lastname: 'kumar',
+    DOB: '25.05.2005',
+    address: { houseno: 4, city: 'bangalore' },
+    phoneno: 9963785264
+  },
+  {
+    _id: ObjectId("65339a8d31abe8002eb01f72"),
+    customerid: 15,
+    firstname: 'ragul',
+    lastname: 'R',
+    DOB: '13.08.2002',
+    address: { houseno: 1, city: 'namakkal' },
+    phoneno: 9063782564
+  },
+  {
+    _id: ObjectId("65339a8d31abe8002eb01f73"),
+    customerid: 16,
+    firstname: 'rammu',
+    lastname: 'U',
+    DOB: '23.07.2002',
+    address: { houseno: 12, city: 'covai' },
+    phoneno: 99637002564
+  },
+  {
+    _id: ObjectId("65339a8d31abe8002eb01f74"),
+    customerid: 18,
+    firstname: 'santhosh',
+    lastname: 'K',
+    DOB: '23.12.2002',
+    address: { houseno: 13, city: 'chennai' },
+    phoneno: 9963782456
+  }
+]
+e-commerce_application> db.createCollection("order_det")
+{ ok: 1 }
+e-commerce_application> db.order_det.insertMany([{Orderid:12,Customerid:21,Order_datetimeOrder_datetime:'12-02-2002 & 10:02 am',Shipped_datetime:'12-02-2002 & 11:02 am',Total_amount:250},
+... {Orderid:13,Customerid:22,Order_datetime:'13-03-2002 & 11:02 am',Shipped_datetime:'13-03-2002 & 03:02 pm',Total_amount:150},
+... {Orderid:14,Customerid:23,Order_datetime:'15-02-2002 & 10:02 am',Shipped_datetime:'15-02-2002 & 11:02 am',Total_amount:250},
+... {Orderid:15,Customerid:24,Order_datetime:'22-06-2002 & 09:02 pm',Shipped_datetime:'22-06-2002 & 10:02 pm',Total_amount:350},
+... {Orderid:16,Customerid:25,Order_datetime:'29-09-2008 & 10:02 am',Shipped_datetime:'29-09-2008 & 11:02 am',Total_amount:450},
+... {Orderid:17,Customerid:26,Order_datetime:'23-09-2022 & 09:02 am',Shipped_datetime:'12-02-2002 & 11:02 am',Total_amount:500}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6533a05631abe8002eb01f77"),
+    '1': ObjectId("6533a05631abe8002eb01f78"),
+    '2': ObjectId("6533a05631abe8002eb01f79"),
+    '3': ObjectId("6533a05631abe8002eb01f7a"),
+    '4': ObjectId("6533a05631abe8002eb01f7b"),
+    '5': ObjectId("6533a05631abe8002eb01f7c")
+  }
+}
+e-commerce_application> db.order_det.find().pretty()
+[
+  {
+    _id: ObjectId("6533a05631abe8002eb01f77"),
+    Orderid: 12,
+    Customerid: 21,
+    Order_datetime: '12-02-2002 & 10:02 am',
+    Shipped_datetime: '12-02-2002 & 11:02 am',
+    Total_amount: 250
+  },
+  {
+    _id: ObjectId("6533a05631abe8002eb01f78"),
+    Orderid: 13,
+    Customerid: 22,
+    Order_datetime: '13-03-2002 & 11:02 am',
+    Shipped_datetime: '13-03-2002 & 03:02 pm',
+    Total_amount: 150
+  },
+  {
+    _id: ObjectId("6533a05631abe8002eb01f79"),
+    Orderid: 14,
+    Customerid: 23,
+    Order_datetime: '15-02-2002 & 10:02 am',
+    Shipped_datetime: '15-02-2002 & 11:02 am',
+    Total_amount: 250
+  },
+  {
+    _id: ObjectId("6533a05631abe8002eb01f7a"),
+    Orderid: 15,
+    Customerid: 24,
+    Order_datetime: '22-06-2002 & 09:02 pm',
+    Shipped_datetime: '22-06-2002 & 10:02 pm',
+    Total_amount: 350
+  },
+  {
+    _id: ObjectId("6533a05631abe8002eb01f7b"),
+    Orderid: 16,
+    Customerid: 25,
+    Order_datetime: '29-09-2008 & 10:02 am',
+    Shipped_datetime: '29-09-2008 & 11:02 am',
+    Total_amount: 450
+  },
+  {
+    _id: ObjectId("6533a05631abe8002eb01f7c"),
+    Orderid: 17,
+    Customerid: 26,
+    Order_datetime: '23-09-2022 & 09:02 am',
+    Shipped_datetime: '12-02-2002 & 11:02 am',
+    Total_amount: 500
+  }
+]
+employee> use  emp_details
+switched to db emp_details
+emp_details> db.createCollection("emp_det")
+{ ok: 1 }
+emp_details> db.emp_det.insertMany([{empno:1,role:'manager',salary:20000},{empno:2,role:'salesman',salary:5000},{empno:3,role:'accountant',salary:10000},{empno:4,role:'salesman',salary:3000},{empno:5,role:'HR',salary:30000}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("6533a77531abe8002eb01f7d"),
+    '1': ObjectId("6533a77531abe8002eb01f7e"),
+    '2': ObjectId("6533a77531abe8002eb01f7f"),
+    '3': ObjectId("6533a77531abe8002eb01f80"),
+    '4': ObjectId("6533a77531abe8002eb01f81")
+  }
+}
+emp_details> db.emp_det.find().pretty()
+[
+  {
+    _id: ObjectId("6533a77531abe8002eb01f7d"),
+    empno: 1,
+    role: 'manager',
+    salary: 20000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f7e"),
+    empno: 2,
+    role: 'salesman',
+    salary: 5000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f7f"),
+    empno: 3,
+    role: 'accountant',
+    salary: 10000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f80"),
+    empno: 4,
+    role: 'salesman',
+    salary: 3000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f81"),
+    empno: 5,
+    role: 'HR',
+    salary: 30000
+  }
+]
+
+
+test> show databases;
+admin                    40.00 KiB
+config                   84.00 KiB
+e-commerce_application   80.00 KiB
+emp_details              40.00 KiB
+local                    40.00 KiB
+mystore                  72.00 KiB
+test                    192.00 KiB
+test> use emp_details;
+switched to db emp_details
+emp_details> db.emp_det.find()
+[
+  {
+    _id: ObjectId("6533a77531abe8002eb01f7d"),
+    empno: 1,
+    role: 'manager',
+    salary: 20000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f7e"),
+    empno: 2,
+    role: 'salesman',
+    salary: 5000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f7f"),
+    empno: 3,
+    role: 'accountant',
+    salary: 10000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f80"),
+    empno: 4,
+    role: 'salesman',
+    salary: 3000
+  },
+  {
+    _id: ObjectId("6533a77531abe8002eb01f81"),
+    empno: 5,
+    role: 'HR',
+    salary: 30000
+  }
+]
+emp_details> db.emp_det.drop()
+true
+emp_details> db.Dropdatabase
+emp_details.Dropdatabase
+emp_details> show databases;
+admin                    40.00 KiB
+config                   72.00 KiB
+e-commerce_application   80.00 KiB
+local                    40.00 KiB
+mystore                  72.00 KiB
+test                    192.00 KiB
+emp_details> db.emp_det.find()
+
+emp_details>
+
+
